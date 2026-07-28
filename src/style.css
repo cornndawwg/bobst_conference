@@ -341,8 +341,7 @@ button {
 
 /* ---- SECTION CARDS ---- */
 .sections {
-  padding: var(--space-4) var(--space-8) var(--space-2);
-  margin-bottom: var(--space-2);
+  padding: var(--space-4) var(--space-8) var(--space-10);
   background: var(--bobst-white);
   position: relative;
 }
