@@ -19,6 +19,8 @@ const icons = {
   tag: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>`,
   cpu: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>`,
   leaf: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>`,
+  close: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
+  playCircle: `<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>`,
 };
 
 // ============================================================
@@ -81,6 +83,25 @@ const sectionData = {
         imagePlaceholder: 'Technology Image — 1200×400',
       },
     ],
+    // PLACEHOLDER: reusing the Labels videos here until real Flexible
+    // Packaging video content is available.
+    videos: [
+      {
+        title: 'MASTER M6 oneECG — BOBST Connect Live Demo',
+        poster: '/posters/label/master-m6.jpg',
+        src: '/videos/label/master-m6-oneecg-connect-live-demo.mp4',
+      },
+      {
+        title: 'Brook + Whittle: Automation in Action',
+        poster: '/posters/label/brook-whittle.jpg',
+        src: '/videos/label/brook-whittle-full.mp4',
+      },
+      {
+        title: 'Die Plate Change',
+        poster: '/posters/label/die-plate-change.jpg',
+        src: '/videos/label/die-plate-change.mp4',
+      },
+    ],
   },
   'folding-carton': {
     category: 'Folding Carton',
@@ -138,6 +159,25 @@ const sectionData = {
         imagePlaceholder: 'Technology Image — 1200×400',
       },
     ],
+    // PLACEHOLDER: reusing the Labels videos here until real Folding Carton
+    // video content is available.
+    videos: [
+      {
+        title: 'MASTER M6 oneECG — BOBST Connect Live Demo',
+        poster: '/posters/label/master-m6.jpg',
+        src: '/videos/label/master-m6-oneecg-connect-live-demo.mp4',
+      },
+      {
+        title: 'Brook + Whittle: Automation in Action',
+        poster: '/posters/label/brook-whittle.jpg',
+        src: '/videos/label/brook-whittle-full.mp4',
+      },
+      {
+        title: 'Die Plate Change',
+        poster: '/posters/label/die-plate-change.jpg',
+        src: '/videos/label/die-plate-change.mp4',
+      },
+    ],
   },
   'labels': {
     category: 'Labels',
@@ -193,6 +233,26 @@ const sectionData = {
         title: 'Digital Meets Conventional',
         text: 'Placeholder text for the technology section. Detail the FlexJet module, All-in-One architecture, and BOBST Connect platform integration.',
         imagePlaceholder: 'Technology Image — 1200×400',
+      },
+    ],
+    // NOTE: `src` currently points at local dev copies (public/videos/label/),
+    // which are gitignored (too large for the repo). Swap these to the
+    // production-hosted URLs once the videos are uploaded to a CDN/host.
+    videos: [
+      {
+        title: 'MASTER M6 oneECG — BOBST Connect Live Demo',
+        poster: '/posters/label/master-m6.jpg',
+        src: '/videos/label/master-m6-oneecg-connect-live-demo.mp4',
+      },
+      {
+        title: 'Brook + Whittle: Automation in Action',
+        poster: '/posters/label/brook-whittle.jpg',
+        src: '/videos/label/brook-whittle-full.mp4',
+      },
+      {
+        title: 'Die Plate Change',
+        poster: '/posters/label/die-plate-change.jpg',
+        src: '/videos/label/die-plate-change.mp4',
       },
     ],
   },
@@ -329,116 +389,47 @@ function renderDetail(sectionId) {
   const data = sectionData[sectionId];
   if (!data) return renderLanding();
 
-  const featuresHtml = data.features
-    .map(
-      (f) => `
-    <div class="feature-card reveal">
-      <div class="feature-card__icon">${icons[f.icon] || icons.zap}</div>
-      <h4 class="feature-card__title">${f.title}</h4>
-      <p class="feature-card__text">${f.text}</p>
-    </div>
-  `
-    )
-    .join('');
+  const hasVideos = Boolean(data.videos && data.videos.length);
 
-  const statsHtml = data.stats
-    .map(
-      (s) => `
-    <div class="stat reveal">
-      <div class="stat__value">${s.value}</div>
-      <div class="stat__label">${s.label}</div>
-    </div>
-  `
-    )
-    .join('');
-
-  const tagsHtml = data.applications
-    .map((a) => `<span class="tag">${a}</span>`)
-    .join('');
-
-  const detailSectionsHtml = data.detailSections
-    .map(
-      (ds, i) => `
-    <section class="content-section">
-      <div class="split${i % 2 === 1 ? ' split--reverse' : ''} reveal">
-        <div>
-          <div class="content-section__eyebrow">${ds.eyebrow}</div>
-          <h3 class="content-section__title"><b>${ds.title}</b></h3>
-          <p class="content-section__text">${ds.text}</p>
+  // Every detail page is kept intentionally minimal: hero (title + subtext,
+  // plus the video carousel when the page has one) directly followed by the
+  // footer — no placeholder feature/stats/applications sections.
+  const videoCarouselHeroHtml = hasVideos
+    ? `
+      <div class="video-carousel video-carousel--hero">
+        <button class="video-carousel__arrow video-carousel__arrow--prev" aria-label="Previous video">${icons.arrowLeft}</button>
+        <div class="video-carousel__stage">
+          ${data.videos
+            .map(
+              (v, i) => `
+            <div class="video-carousel__item" data-index="${i}" data-src="${v.src}">
+              <img class="video-carousel__poster" src="${v.poster}" alt="${v.title}" loading="lazy" />
+              <div class="video-carousel__scrim"></div>
+              <div class="video-carousel__play">${icons.playCircle}</div>
+              <div class="video-carousel__title">${v.title}</div>
+            </div>
+          `
+            )
+            .join('')}
         </div>
-        <div class="image-block image-block--medium">
-          <div class="image-block__placeholder">
-            <div class="image-block__placeholder-icon">${icons.image}</div>
-            <span class="image-block__placeholder-text">${ds.imagePlaceholder}</span>
-          </div>
-        </div>
+        <button class="video-carousel__arrow video-carousel__arrow--next" aria-label="Next video">${icons.arrowRight}</button>
       </div>
-    </section>
-  `
-    )
-    .join('');
+    `
+    : '';
 
   return `
     ${renderNav(true)}
 
     <div class="page" id="detail-page">
-      <div class="detail">
-        <div class="detail__hero">
-          <div class="detail__hero-bg">
-            <span class="detail__hero-placeholder">${data.heroPlaceholder}</span>
-          </div>
+      <div class="detail detail--minimal">
+        <div class="detail__hero detail__hero--minimal">
           <div class="detail__hero-content">
             <div class="detail__category">${data.category}</div>
             <h1 class="detail__title"><b>${data.title}</b></h1>
             <p class="detail__intro">${data.intro}</p>
+            ${videoCarouselHeroHtml}
           </div>
         </div>
-
-        <!-- Key Features -->
-        <section class="content-section">
-          <div class="content-section__eyebrow">Key Solutions</div>
-          <h2 class="content-section__title"><b>Core Capabilities</b></h2>
-          <p class="content-section__text">
-            Placeholder text for the capabilities overview. Describe what sets BOBST apart in this market segment.
-          </p>
-          <div class="feature-grid">
-            ${featuresHtml}
-          </div>
-        </section>
-
-        <!-- Full-width Image -->
-        <section class="content-section">
-          <div class="image-block image-block--wide reveal">
-            <div class="image-block__placeholder">
-              <div class="image-block__placeholder-icon">${icons.image}</div>
-              <span class="image-block__placeholder-text">Full Width Image — 1200×360</span>
-            </div>
-          </div>
-        </section>
-
-        <!-- Stats -->
-        <section class="content-section">
-          <div class="content-section__eyebrow">By The Numbers</div>
-          <h2 class="content-section__title"><b>Performance Metrics</b></h2>
-          <div class="stats-row">
-            ${statsHtml}
-          </div>
-        </section>
-
-        <!-- Detail Sections (alternating layout) -->
-        ${detailSectionsHtml}
-
-        <!-- Applications -->
-        <section class="content-section">
-          <div class="content-section__eyebrow reveal">Applications</div>
-          <h2 class="content-section__title reveal"><b>End-Use Sectors</b></h2>
-          <p class="content-section__text reveal">
-            Placeholder text for applications. Describe the key industry sectors and end-use applications served by this solution category.
-          </p>
-          <div class="tags reveal">
-            ${tagsHtml}
-          </div>
-        </section>
 
         <footer class="footer" id="footer">
           <img src="/logo.svg" alt="BOBST" class="footer__logo" />
@@ -485,6 +476,7 @@ function renderRoute() {
   initCardClicks();
   initScrollEffects();
   initRevealObserver();
+  initVideoCarousels();
 }
 
 // ============================================================
@@ -565,6 +557,139 @@ function initRevealObserver() {
   document.querySelectorAll('.reveal').forEach((el) => {
     revealObserver.observe(el);
   });
+}
+
+// ============================================================
+// Video Carousel (3D circular, arrows + touch swipe)
+// ============================================================
+function initVideoCarousels() {
+  document.querySelectorAll('.video-carousel').forEach((carousel) => {
+    const stage = carousel.querySelector('.video-carousel__stage');
+    const items = Array.from(carousel.querySelectorAll('.video-carousel__item'));
+    const prevBtn = carousel.querySelector('.video-carousel__arrow--prev');
+    const nextBtn = carousel.querySelector('.video-carousel__arrow--next');
+    const count = items.length;
+    if (!count) return;
+
+    let active = 0;
+    // Scale side-item offset/depth relative to the actual card size so the
+    // 3D effect looks proportional whether it's the compact or hero carousel.
+    const itemWidth = items[0]?.getBoundingClientRect().width || 320;
+    const sideOffsetX = itemWidth * 0.72;
+    const sideTranslateZ = -itemWidth * 0.44;
+
+    function render() {
+      items.forEach((item, i) => {
+        let offset = i - active;
+        if (offset > count / 2) offset -= count;
+        if (offset < -count / 2) offset += count;
+
+        const abs = Math.abs(offset);
+        const translateX = offset * sideOffsetX;
+        const translateZ = abs === 0 ? 0 : sideTranslateZ;
+        const rotateY = offset * -38;
+        const scale = abs === 0 ? 1 : 0.78;
+        const opacity = abs <= 1 ? (abs === 0 ? 1 : 0.55) : 0;
+
+        item.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
+        item.style.opacity = opacity;
+        item.style.zIndex = String(10 - abs);
+        item.style.pointerEvents = abs > 1 ? 'none' : 'auto';
+        item.classList.toggle('video-carousel__item--active', offset === 0);
+      });
+    }
+
+    function goTo(index) {
+      active = ((index % count) + count) % count;
+      render();
+    }
+
+    prevBtn?.addEventListener('click', () => goTo(active - 1));
+    nextBtn?.addEventListener('click', () => goTo(active + 1));
+
+    items.forEach((item, i) => {
+      item.addEventListener('click', () => {
+        if (i === active) {
+          const title = item.querySelector('.video-carousel__title')?.textContent || '';
+          openFullscreenVideo(item.dataset.src, title);
+        } else {
+          goTo(i);
+        }
+      });
+    });
+
+    // Touch swipe (left/right like a phone)
+    let touchStartX = null;
+    stage.addEventListener(
+      'touchstart',
+      (e) => {
+        touchStartX = e.touches[0].clientX;
+      },
+      { passive: true }
+    );
+    stage.addEventListener(
+      'touchend',
+      (e) => {
+        if (touchStartX === null) return;
+        const deltaX = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(deltaX) > 40) {
+          goTo(active + (deltaX < 0 ? 1 : -1));
+        }
+        touchStartX = null;
+      },
+      { passive: true }
+    );
+
+    render();
+  });
+}
+
+// ============================================================
+// Fullscreen Video Overlay
+// ============================================================
+function closeFullscreenVideo() {
+  const existing = document.getElementById('video-overlay');
+  if (existing) existing.remove();
+  document.body.style.overflow = '';
+}
+
+function openFullscreenVideo(src, title) {
+  closeFullscreenVideo();
+
+  const overlay = document.createElement('div');
+  overlay.className = 'video-overlay';
+  overlay.id = 'video-overlay';
+  overlay.innerHTML = `
+    <button class="video-overlay__close" aria-label="Close video">${icons.close}</button>
+    <video class="video-overlay__video" src="${src}" title="${title}" controls autoplay playsinline></video>
+  `;
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+
+  const video = overlay.querySelector('video');
+
+  function handleKeydown(e) {
+    if (e.key === 'Escape') close();
+  }
+
+  function close() {
+    video.pause();
+    if (document.fullscreenElement) {
+      document.exitFullscreen?.().catch(() => {});
+    }
+    document.removeEventListener('keydown', handleKeydown);
+    closeFullscreenVideo();
+  }
+
+  overlay.querySelector('.video-overlay__close').addEventListener('click', close);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) close();
+  });
+  document.addEventListener('keydown', handleKeydown);
+
+  // Best-effort true fullscreen — this runs inside a click handler, so it's
+  // a valid user gesture for the Fullscreen API.
+  overlay.requestFullscreen?.().catch(() => {});
 }
 
 // ============================================================

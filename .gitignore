@@ -25,3 +25,9 @@ dist-ssr
 
 # Extracted reference files
 brand_guidelines.txt
+
+# Visual QA screenshots
+screenshots/
+
+# Local-only source videos (too large for git; production uses hosted URLs)
+public/videos/
