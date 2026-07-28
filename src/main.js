@@ -290,39 +290,37 @@ function renderLanding() {
     ${renderNav(false)}
 
     <div class="page" id="landing-page">
-      <section class="hero" id="hero-section">
-        <div class="hero__content">
-          <div class="hero__eyebrow">BOBST Packaging Solutions</div>
-          <h1 class="hero__title">
-            <b>Reduce Complexity,</b><br>
-            Improve Performance
-          </h1>
-          <p class="hero__subtitle">
-            Placeholder text for hero subtitle. Describe the overarching value proposition of BOBST solutions for packaging converters.
-          </p>
-          <div class="hero__cta-hint">
-            Explore our solutions below
-            <span class="hero__scroll-indicator"></span>
+      <div class="home-viewport">
+        <section class="hero" id="hero-section">
+          <div class="hero__content">
+            <div class="hero__eyebrow">BOBST Packaging Solutions</div>
+            <h1 class="hero__title">
+              <b>Reduce Complexity,</b><br>
+              Improve Performance
+            </h1>
+            <p class="hero__subtitle">
+              Explore BOBST solutions across Flexible Packaging, Folding Carton, and Labels.
+            </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="sections" id="sections">
-        <div class="sections__inner">
-          <div class="sections__header">
-            <p class="sections__label">Our Expertise</p>
-            <h2 class="sections__title">Solutions by Market</h2>
+        <section class="sections" id="sections">
+          <div class="sections__inner">
+            <div class="sections__header">
+              <p class="sections__label">Our Expertise</p>
+              <h2 class="sections__title">Solutions by Market</h2>
+            </div>
+            <div class="sections__grid" id="sections-grid">
+              ${cardsHtml}
+            </div>
           </div>
-          <div class="sections__grid" id="sections-grid">
-            ${cardsHtml}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <footer class="footer" id="footer">
-        <img src="/logo.svg" alt="BOBST" class="footer__logo" />
-        <p class="footer__text">© ${new Date().getFullYear()} BOBST. All rights reserved.</p>
-      </footer>
+        <footer class="footer" id="footer">
+          <img src="/logo.svg" alt="BOBST" class="footer__logo" />
+          <p class="footer__text">© ${new Date().getFullYear()} BOBST. All rights reserved.</p>
+        </footer>
+      </div>
     </div>
   `;
 }
