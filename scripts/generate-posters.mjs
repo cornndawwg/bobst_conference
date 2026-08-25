@@ -1,19 +1,30 @@
-// Generates poster thumbnail JPGs for the label videos by loading each video
-// in a headless browser, seeking to a representative frame, and screenshotting
-// just the video element. Used because ffmpeg isn't available in this environment.
+// Generates poster thumbnail JPGs for videos by loading each one in a
+// headless browser, seeking to a representative frame, and screenshotting
+// just the video element. Used because ffmpeg isn't available in this
+// environment.
+//
+// Usage: node scripts/generate-posters.mjs <videoUrlDir> <outDir> [--seek=8]
+// Reads every .mp4 in public/<videoUrlDir>, writes posters to public/<outDir>.
 import { chromium } from 'playwright';
 import path from 'path';
 import fs from 'fs';
 
-const videos = [
-  { file: 'die-plate-change.mp4', seek: 4, out: 'die-plate-change.jpg' },
-  { file: 'brook-whittle-full.mp4', seek: 8, out: 'brook-whittle.jpg' },
-  { file: 'master-m6-oneecg-connect-live-demo.mp4', seek: 25, out: 'master-m6.jpg' },
-];
+const [videoDirArg, outDirArg, ...rest] = process.argv.slice(2);
+if (!videoDirArg || !outDirArg) {
+  console.error('Usage: node scripts/generate-posters.mjs <videos/relative/dir> <posters/relative/dir> [--seek=8]');
+  process.exit(1);
+}
+const seekArg = rest.find((a) => a.startsWith('--seek='));
+const defaultSeek = seekArg ? Number(seekArg.split('=')[1]) : 8;
 
 const publicDir = path.resolve('public');
-const outDir = path.join(publicDir, 'posters', 'label');
+const videoFsDir = path.join(publicDir, videoDirArg);
+const outDir = path.join(publicDir, outDirArg);
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+
+const files = fs.readdirSync(videoFsDir).filter((f) => f.toLowerCase().endsWith('.mp4'));
+// Smallest files first so quick wins land before any slow/huge file.
+files.sort((a, b) => fs.statSync(path.join(videoFsDir, a)).size - fs.statSync(path.join(videoFsDir, b)).size);
 
 const PORT = process.env.PORT || 5173;
 const browser = await chromium.launch();
@@ -26,8 +37,9 @@ function withTimeout(promise, ms, label) {
   ]);
 }
 
-for (const v of videos) {
-  const url = `http://localhost:${PORT}/videos/label/${v.file}`;
+for (const file of files) {
+  const outFile = file.replace(/\.mp4$/i, '.jpg');
+  const url = `http://localhost:${PORT}/${videoDirArg}/${file}`;
   try {
     await page.setContent(`
       <html><body style="margin:0;background:#000;">
@@ -43,15 +55,15 @@ for (const v of videos) {
         }
         v.currentTime = seek;
         await new Promise((resolve) => v.addEventListener('seeked', resolve, { once: true }));
-      }, v.seek),
-      45000,
-      v.file
+      }, defaultSeek),
+      90000,
+      file
     );
     await page.waitForTimeout(300);
-    await videoEl.screenshot({ path: path.join(outDir, v.out), quality: 82, type: 'jpeg' });
-    console.log('Generated poster for', v.file);
+    await videoEl.screenshot({ path: path.join(outDir, outFile), quality: 82, type: 'jpeg' });
+    console.log('Generated poster for', file);
   } catch (err) {
-    console.log('FAILED poster for', v.file, '-', err.message);
+    console.log('FAILED poster for', file, '-', err.message);
   }
 }
 

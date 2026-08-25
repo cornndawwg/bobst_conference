@@ -11,7 +11,7 @@ const browser = await chromium.launch();
 const context = await browser.newContext({ viewport: { width: 1600, height: 1000 }, hasTouch: true });
 const page = await context.newPage();
 
-await page.goto(`http://localhost:${PORT}/#/labels`, { waitUntil: 'networkidle' });
+await page.goto(`http://localhost:${PORT}/#/s/productivity-solutions/labels`, { waitUntil: 'networkidle' });
 await page.waitForTimeout(600);
 await page.locator('.video-carousel').scrollIntoViewIfNeeded();
 await page.waitForTimeout(400);

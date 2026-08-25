@@ -377,6 +377,15 @@ button {
   gap: var(--space-6);
 }
 
+.sections__grid--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.sections__grid--5 {
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-4);
+}
+
 /* ---- CARD ---- */
 .card {
   position: relative;

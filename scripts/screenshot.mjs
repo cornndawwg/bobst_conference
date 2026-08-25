@@ -8,10 +8,16 @@ const PORT = process.env.PORT || 5173;
 const BASE_URL = `http://localhost:${PORT}`;
 
 const routes = [
-  { path: '/', name: 'home' },
-  { path: '/#/flexible-packaging', name: 'flexible-packaging' },
-  { path: '/#/folding-carton', name: 'folding-carton' },
-  { path: '/#/labels', name: 'labels' },
+  { path: '/', name: 'hub' },
+  { path: '/#/s/productivity-solutions', name: 'productivity-solutions-home' },
+  { path: '/#/s/productivity-solutions/flexible-packaging', name: 'productivity-flexible-packaging' },
+  { path: '/#/s/productivity-solutions/folding-carton', name: 'productivity-folding-carton' },
+  { path: '/#/s/productivity-solutions/labels', name: 'productivity-labels' },
+  { path: '/#/s/quality-color-consistency', name: 'quality-home' },
+  { path: '/#/s/quality-color-consistency/labels', name: 'quality-labels' },
+  { path: '/#/s/sustainability-innovation', name: 'sustainability-home' },
+  { path: '/#/s/lifecycle-performance-services', name: 'lifecycle-home' },
+  { path: '/#/s/digital-solutions', name: 'digital-home' },
 ];
 
 const outDir = path.resolve('screenshots');

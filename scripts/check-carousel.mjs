@@ -11,7 +11,7 @@ if (!fs.existsSync(outDir)) fs.mkdirSync(outDir);
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
 
-await page.goto(`http://localhost:${PORT}/#/labels`, { waitUntil: 'networkidle' });
+await page.goto(`http://localhost:${PORT}/#/s/productivity-solutions/labels`, { waitUntil: 'networkidle' });
 await page.waitForTimeout(800);
 
 const carousel = page.locator('.video-carousel');

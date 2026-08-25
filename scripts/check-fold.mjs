@@ -14,25 +14,33 @@ const sizes = [
   { width: 1366, height: 768, name: '1366x768' },
 ];
 
+const routes = [
+  { path: '/', name: 'hub' },
+  { path: '/#/s/productivity-solutions', name: 'station-productivity' },
+  { path: '/#/s/digital-solutions', name: 'station-digital' },
+];
+
 const browser = await chromium.launch();
 
-for (const size of sizes) {
-  const page = await browser.newPage({ viewport: { width: size.width, height: size.height } });
-  await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
-  await page.waitForTimeout(1000);
+for (const route of routes) {
+  for (const size of sizes) {
+    const page = await browser.newPage({ viewport: { width: size.width, height: size.height } });
+    await page.goto(`http://localhost:${PORT}${route.path}`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1000);
 
-  const { scrollHeight, clientHeight } = await page.evaluate(() => ({
-    scrollHeight: document.documentElement.scrollHeight,
-    clientHeight: document.documentElement.clientHeight,
-  }));
+    const { scrollHeight, clientHeight } = await page.evaluate(() => ({
+      scrollHeight: document.documentElement.scrollHeight,
+      clientHeight: document.documentElement.clientHeight,
+    }));
 
-  const fits = scrollHeight <= clientHeight;
-  console.log(
-    `[${size.name}] viewport=${clientHeight}px content=${scrollHeight}px -> ${fits ? 'FITS (no scroll)' : `OVERFLOW by ${scrollHeight - clientHeight}px`}`
-  );
+    const fits = scrollHeight <= clientHeight;
+    console.log(
+      `[${route.name} @ ${size.name}] viewport=${clientHeight}px content=${scrollHeight}px -> ${fits ? 'FITS (no scroll)' : `OVERFLOW by ${scrollHeight - clientHeight}px`}`
+    );
 
-  await page.screenshot({ path: path.join(outDir, `fold-${size.name}.png`) });
-  await page.close();
+    await page.screenshot({ path: path.join(outDir, `fold-${route.name}-${size.name}.png`) });
+    await page.close();
+  }
 }
 
 await browser.close();
