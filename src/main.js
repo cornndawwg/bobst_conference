@@ -9,6 +9,7 @@ const icons = {
   image: `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>`,
   close: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
   playCircle: `<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>`,
+  zoomIn: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>`,
 };
 
 // ============================================================
@@ -106,7 +107,27 @@ const stations = {
         headline: 'Protect Quality Throughout Production',
         body:
           'Solutions including ACCUCHECK, ACCUPLATEN, POWER REGISTER and high-performance tooling help detect defects, improve registration and maintain consistent converting quality.',
-        videos: [],
+        videos: [
+          {
+            title: 'ACCUPLATEN — Faster Die-Cutting Setup',
+            poster: '/posters/quality-color-consistency/folding-carton/accuplaten-speed-patching.jpg',
+            src: '/videos/quality-color-consistency/folding-carton/accuplaten-speed-patching.mp4',
+          },
+        ],
+        slides: [
+          {
+            title: 'BOBST ACCUCHECK — Inline Quality Control',
+            image: '/images/quality-color-consistency/folding-carton/accucheck-machine.jpg',
+          },
+          {
+            title: 'Full-Speed Inspection Unit',
+            image: '/images/quality-color-consistency/folding-carton/full-speed-inspection.jpg',
+          },
+          {
+            title: 'Complete Folding Carton Production Line',
+            image: '/images/quality-color-consistency/folding-carton/folding-carton-line.jpg',
+          },
+        ],
       },
       'labels': {
         blurb:
@@ -115,6 +136,7 @@ const stations = {
         body:
           'Integrated color management, inspection and process-control solutions help label converters maintain predictable results across changing substrates, run lengths and production technologies.',
         videos: [
+          { title: 'BOBST Connect — Quality Reports in the Cloud', poster: '/posters/quality-color-consistency/labels/techproofpoint-connect-quality-reports.jpg', src: '/videos/quality-color-consistency/labels/techproofpoint-connect-quality-reports.mp4' },
           { title: 'ACCUCHECK B1 — Introduction', poster: '/posters/quality-color-consistency/labels/accucheck-b1-introduction.jpg', src: '/videos/quality-color-consistency/labels/accucheck-b1-introduction.mp4' },
           { title: 'ACCUCHECK B2 — Inspection', poster: '/posters/quality-color-consistency/labels/accucheck-b2-inspection.jpg', src: '/videos/quality-color-consistency/labels/accucheck-b2-inspection.mp4' },
           { title: 'ACCUCHECK B3 — Registration', poster: '/posters/quality-color-consistency/labels/accucheck-b3-registration.jpg', src: '/videos/quality-color-consistency/labels/accucheck-b3-registration.mp4' },
@@ -150,8 +172,22 @@ const stations = {
           'Use connected production insights and optimized tooling to reduce waste, improve energy efficiency and maximize material performance.',
         headline: 'Produce More with Fewer Resources',
         body:
-          'Energy monitoring, production insights and optimized tooling help folding carton converters reduce waste, make better operating decisions and improve resource efficiency.',
+          'Energy monitoring, production insights and optimized tooling help folding carton converters reduce waste, make better operating decisions and improve resource efficiency. The Pack Energy Efficiency module reduces total machine energy consumption by up to 20% on folding carton applications.',
         videos: [],
+        slides: [
+          {
+            title: 'MASTERCUT 106 PER — Pack Energy Efficiency',
+            image: '/images/sustainability-innovation/folding-carton/mastercut-106-per.jpg',
+          },
+          {
+            title: 'EXPERTCUT 106 with POWER REGISTER',
+            image: '/images/sustainability-innovation/folding-carton/expertcut-power-register.jpg',
+          },
+          {
+            title: 'BOBST Campus — Engineering Sustainable Production',
+            image: '/images/sustainability-innovation/folding-carton/bobst-campus.jpg',
+          },
+        ],
       },
       'labels': {
         blurb:
@@ -405,37 +441,81 @@ function renderStationHome(stationSlug) {
 }
 
 // ============================================================
-// Market Detail — minimal layout: hero (+ optional video carousel) + footer
+// Video Carousel markup (videos only — 3D coverflow, click to play fullscreen)
+// ============================================================
+function renderVideoCarousel(videos) {
+  if (!videos || !videos.length) return '';
+  return `
+    <div class="video-carousel video-carousel--hero">
+      <button class="video-carousel__arrow video-carousel__arrow--prev" aria-label="Previous video">${icons.arrowLeft}</button>
+      <div class="video-carousel__stage">
+        ${videos
+          .map(
+            (v, i) => `
+          <div class="video-carousel__item" data-index="${i}" data-src="${v.src}">
+            <img class="video-carousel__poster" src="${v.poster}" alt="${v.title}" loading="lazy" />
+            <div class="video-carousel__scrim"></div>
+            <div class="video-carousel__play">${icons.playCircle}</div>
+            <div class="video-carousel__title">${v.title}</div>
+          </div>
+        `
+          )
+          .join('')}
+      </div>
+      <button class="video-carousel__arrow video-carousel__arrow--next" aria-label="Next video">${icons.arrowRight}</button>
+    </div>
+  `;
+}
+
+// ============================================================
+// Slide Deck markup (PowerPoint-derived images — its own slider,
+// separate from the video carousel; click to view fullscreen)
+// ============================================================
+function renderSlideDeck(slides) {
+  if (!slides || !slides.length) return '';
+  return `
+    <section class="slide-deck" id="slide-deck">
+      <div class="slide-deck__inner">
+        <p class="slide-deck__label">Featured Content</p>
+        <div class="slide-deck__viewer">
+          <button class="slide-deck__arrow slide-deck__arrow--prev" aria-label="Previous slide">${icons.arrowLeft}</button>
+          <div class="slide-deck__stage">
+            ${slides
+              .map(
+                (s, i) => `
+              <div class="slide-deck__slide${i === 0 ? ' slide-deck__slide--active' : ''}" data-index="${i}" data-title="${s.title}">
+                <img class="slide-deck__image" src="${s.image}" alt="${s.title}" loading="lazy" />
+                <div class="slide-deck__zoom-hint">${icons.zoomIn}</div>
+              </div>
+            `
+              )
+              .join('')}
+          </div>
+          <button class="slide-deck__arrow slide-deck__arrow--next" aria-label="Next slide">${icons.arrowRight}</button>
+        </div>
+        <div class="slide-deck__caption" id="slide-deck-caption">${slides[0].title}</div>
+        <div class="slide-deck__dots">
+          ${slides
+            .map(
+              (_, i) => `<button class="slide-deck__dot${i === 0 ? ' slide-deck__dot--active' : ''}" data-index="${i}" aria-label="Go to slide ${i + 1}"></button>`
+            )
+            .join('')}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+// ============================================================
+// Market Detail — hero (+ optional video carousel) + optional
+// slide deck + footer. Pages with extra slide-deck content are
+// allowed to grow taller / scroll rather than being forced onto
+// one screen.
 // ============================================================
 function renderMarketDetail(stationSlug, marketSlug) {
   const station = stations[stationSlug];
   const market = station && station.markets[marketSlug];
   if (!station || !market) return renderHub();
-
-  const hasVideos = Boolean(market.videos && market.videos.length);
-
-  const videoCarouselHeroHtml = hasVideos
-    ? `
-      <div class="video-carousel video-carousel--hero">
-        <button class="video-carousel__arrow video-carousel__arrow--prev" aria-label="Previous video">${icons.arrowLeft}</button>
-        <div class="video-carousel__stage">
-          ${market.videos
-            .map(
-              (v, i) => `
-            <div class="video-carousel__item" data-index="${i}" data-src="${v.src}">
-              <img class="video-carousel__poster" src="${v.poster}" alt="${v.title}" loading="lazy" />
-              <div class="video-carousel__scrim"></div>
-              <div class="video-carousel__play">${icons.playCircle}</div>
-              <div class="video-carousel__title">${v.title}</div>
-            </div>
-          `
-            )
-            .join('')}
-        </div>
-        <button class="video-carousel__arrow video-carousel__arrow--next" aria-label="Next video">${icons.arrowRight}</button>
-      </div>
-    `
-    : '';
 
   return `
     ${renderNav(`#/s/${stationSlug}`, `Back to ${station.category}`)}
@@ -447,9 +527,11 @@ function renderMarketDetail(stationSlug, marketSlug) {
             <div class="detail__category">${station.category} — ${MARKET_TITLES[marketSlug] || marketSlug}</div>
             <h1 class="detail__title"><b>${market.headline}</b></h1>
             <p class="detail__intro">${market.body}</p>
-            ${videoCarouselHeroHtml}
+            ${renderVideoCarousel(market.videos)}
           </div>
         </div>
+
+        ${renderSlideDeck(market.slides)}
 
         ${renderFooter()}
       </div>
@@ -496,6 +578,7 @@ function renderRoute() {
   initScrollEffects();
   initRevealObserver();
   initVideoCarousels();
+  initSlideDecks();
 }
 
 // ============================================================
@@ -663,6 +746,75 @@ function initVideoCarousels() {
 }
 
 // ============================================================
+// Slide Deck (flat crossfade slider for PowerPoint-derived images;
+// arrows, dots, and touch swipe — separate from the video carousel)
+// ============================================================
+function initSlideDecks() {
+  document.querySelectorAll('.slide-deck').forEach((deck) => {
+    const stage = deck.querySelector('.slide-deck__stage');
+    const slides = Array.from(deck.querySelectorAll('.slide-deck__slide'));
+    const dots = Array.from(deck.querySelectorAll('.slide-deck__dot'));
+    const caption = deck.querySelector('.slide-deck__caption');
+    const prevBtn = deck.querySelector('.slide-deck__arrow--prev');
+    const nextBtn = deck.querySelector('.slide-deck__arrow--next');
+    const count = slides.length;
+    if (!count) return;
+
+    let active = 0;
+
+    function render() {
+      slides.forEach((s, i) => s.classList.toggle('slide-deck__slide--active', i === active));
+      dots.forEach((d, i) => d.classList.toggle('slide-deck__dot--active', i === active));
+      if (caption) caption.textContent = slides[active].dataset.title || '';
+    }
+
+    function goTo(index) {
+      active = ((index % count) + count) % count;
+      render();
+    }
+
+    prevBtn?.addEventListener('click', () => goTo(active - 1));
+    nextBtn?.addEventListener('click', () => goTo(active + 1));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+    slides.forEach((slide, i) => {
+      slide.addEventListener('click', () => {
+        if (i !== active) {
+          goTo(i);
+          return;
+        }
+        const img = slide.querySelector('.slide-deck__image');
+        if (img) openFullscreenImage(img.src, slide.dataset.title || '');
+      });
+    });
+
+    // Touch swipe (left/right like a phone)
+    let touchStartX = null;
+    stage?.addEventListener(
+      'touchstart',
+      (e) => {
+        touchStartX = e.touches[0].clientX;
+      },
+      { passive: true }
+    );
+    stage?.addEventListener(
+      'touchend',
+      (e) => {
+        if (touchStartX === null) return;
+        const deltaX = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(deltaX) > 40) {
+          goTo(active + (deltaX < 0 ? 1 : -1));
+        }
+        touchStartX = null;
+      },
+      { passive: true }
+    );
+
+    render();
+  });
+}
+
+// ============================================================
 // Fullscreen Video Overlay
 // ============================================================
 function closeFullscreenVideo() {
@@ -708,6 +860,38 @@ function openFullscreenVideo(src, title) {
   // Best-effort true fullscreen — this runs inside a click handler, so it's
   // a valid user gesture for the Fullscreen API.
   overlay.requestFullscreen?.().catch(() => {});
+}
+
+// ============================================================
+// Fullscreen Image Overlay (for carousel items with no video source)
+// ============================================================
+function openFullscreenImage(src, title) {
+  closeFullscreenVideo();
+
+  const overlay = document.createElement('div');
+  overlay.className = 'video-overlay video-overlay--image';
+  overlay.id = 'video-overlay';
+  overlay.innerHTML = `
+    <button class="video-overlay__close" aria-label="Close image">${icons.close}</button>
+    <img class="video-overlay__image" src="${src}" alt="${title}" />
+  `;
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+
+  function handleKeydown(e) {
+    if (e.key === 'Escape') close();
+  }
+
+  function close() {
+    document.removeEventListener('keydown', handleKeydown);
+    closeFullscreenVideo();
+  }
+
+  overlay.querySelector('.video-overlay__close').addEventListener('click', close);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) close();
+  });
+  document.addEventListener('keydown', handleKeydown);
 }
 
 // ============================================================

@@ -539,14 +539,20 @@ button {
 
 /* ---- DETAIL PAGE ---- */
 /* Every detail page is minimal: hero (title + subtext, plus a video
-   carousel when present) and footer, centered as a single unit so
-   everything fits on one kiosk screen. */
+   carousel when present), an optional slide deck, and a footer. Pages
+   with just a hero/carousel naturally sit with breathing room above the
+   footer (sticky-footer pattern); pages with more content (e.g. a slide
+   deck) are allowed to grow taller and scroll rather than being forced
+   onto one screen. */
 .detail {
   min-height: 100vh;
   padding-top: 70px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+}
+
+.detail > .footer {
+  margin-top: auto;
 }
 
 .detail__hero {
@@ -924,6 +930,139 @@ button {
   margin-left: calc(var(--space-8) * -1);
 }
 
+/* ---- SLIDE DECK (PowerPoint-derived image slider) ----
+   A flat crossfade slider, intentionally distinct from the 3D video
+   carousel above — this is where deck/slide imagery lives, separate
+   from playable video content. */
+.slide-deck {
+  padding: var(--space-10) var(--space-8) var(--space-4);
+}
+
+.slide-deck__inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slide-deck__label {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.slide-deck__viewer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide-deck__stage {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  aspect-ratio: 16 / 9;
+  background: var(--neutral-100);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.slide-deck__slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity var(--duration-slow) var(--ease-out);
+}
+
+.slide-deck__slide--active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.slide-deck__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.slide-deck__zoom-hint {
+  position: absolute;
+  bottom: var(--space-3);
+  right: var(--space-3);
+  color: var(--bobst-white);
+  opacity: 0;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.slide-deck__slide:hover .slide-deck__zoom-hint {
+  opacity: 0.9;
+}
+
+.slide-deck__arrow {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bobst-white);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin: 0 var(--space-4);
+  transition: background var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+
+.slide-deck__arrow:hover {
+  background: var(--accent-hover);
+  transform: scale(1.06);
+}
+
+.slide-deck__caption {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.slide-deck__dots {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.slide-deck__dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--border-color);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+
+.slide-deck__dot--active {
+  background: var(--accent);
+  transform: scale(1.3);
+}
+
 /* ---- FULLSCREEN VIDEO OVERLAY ---- */
 .video-overlay {
   position: fixed;
@@ -941,6 +1080,14 @@ button {
   height: 100%;
   max-width: 100vw;
   max-height: 100vh;
+  object-fit: contain;
+}
+
+.video-overlay__image {
+  width: auto;
+  height: auto;
+  max-width: 90vw;
+  max-height: 90vh;
   object-fit: contain;
 }
 
