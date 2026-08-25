@@ -1083,6 +1083,10 @@ button {
   object-fit: contain;
 }
 
+.video-overlay__video--embed {
+  border: none;
+}
+
 .video-overlay__image {
   width: auto;
   height: auto;

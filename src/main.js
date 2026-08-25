@@ -23,6 +23,30 @@ const MARKET_TITLES = {
 };
 
 // ============================================================
+// Video helpers — a video entry is either a locally-hosted file
+// ({ src, poster }) or a hosted embed ({ provider: 'vimeo'|'youtube',
+// embedId, poster? }). This lets Vimeo/YouTube links play inline in the
+// same carousel + fullscreen overlay as local mp4s without a backend.
+// ============================================================
+function getVideoEmbedUrl(video) {
+  if (video.provider === 'vimeo' && video.embedId) {
+    const hash = video.embedHash ? `&h=${video.embedHash}` : '';
+    return `https://player.vimeo.com/video/${video.embedId}?autoplay=1&title=0&byline=0&portrait=0${hash}`;
+  }
+  if (video.provider === 'youtube' && video.embedId) {
+    return `https://www.youtube.com/embed/${video.embedId}?autoplay=1&rel=0`;
+  }
+  return null;
+}
+
+function getVideoPoster(video) {
+  if (video.poster) return video.poster;
+  if (video.provider === 'vimeo' && video.embedId) return `https://vumbnail.com/${video.embedId}.jpg`;
+  if (video.provider === 'youtube' && video.embedId) return `https://img.youtube.com/vi/${video.embedId}/hqdefault.jpg`;
+  return '';
+}
+
+// ============================================================
 // Station + Market Content
 // ============================================================
 // NOTE on videos: `src`/`poster` currently point at local dev copies under
@@ -59,7 +83,9 @@ const stations = {
         headline: 'Improve Folding Carton Productivity',
         body:
           'Standardized tooling, connected production processes and workforce training help converters reduce makeready time, improve repeatability and maintain performance across every job.',
-        videos: [],
+        videos: [
+          { title: 'Zumbiel and BOBST', provider: 'vimeo', embedId: '1093624953' },
+        ],
       },
       'labels': {
         blurb:
@@ -82,6 +108,11 @@ const stations = {
             title: 'Die Plate Change',
             poster: '/posters/productivity-solutions/labels/die-plate-change.jpg',
             src: '/videos/productivity-solutions/labels/die-plate-change.mp4',
+          },
+          {
+            title: 'How Label Specialties Elevates Production with the MASTER M5',
+            provider: 'youtube',
+            embedId: 'p-n1VRqWWn8',
           },
         ],
       },
@@ -113,6 +144,8 @@ const stations = {
             poster: '/posters/quality-color-consistency/folding-carton/accuplaten-speed-patching.jpg',
             src: '/videos/quality-color-consistency/folding-carton/accuplaten-speed-patching.mp4',
           },
+          { title: 'Tooling with Patrick and Brian', provider: 'vimeo', embedId: '1080758081' },
+          { title: 'How TAVO Packaging Is Delivering More with BOBST', provider: 'youtube', embedId: '-pvVuTX9S8A' },
         ],
         slides: [
           {
@@ -149,6 +182,11 @@ const stations = {
           { title: 'ACCUCHECK B10 — Nozzle Compensation', poster: '/posters/quality-color-consistency/labels/accucheck-b10-nozzle-compensation.jpg', src: '/videos/quality-color-consistency/labels/accucheck-b10-nozzle-compensation.mp4' },
           { title: 'ACCUCHECK B11 — Recap', poster: '/posters/quality-color-consistency/labels/accucheck-b11-recap.jpg', src: '/videos/quality-color-consistency/labels/accucheck-b11-recap.mp4' },
           { title: 'ACCUCHECK — Full Edit', poster: '/posters/quality-color-consistency/labels/accucheck-full-edit.jpg', src: '/videos/quality-color-consistency/labels/accucheck-full-edit.mp4' },
+          {
+            title: 'Brook + Whittle Elevates Digital Productivity with the BOBST DIGITAL MASTER 340',
+            provider: 'youtube',
+            embedId: 'OG2HgO17sHY',
+          },
         ],
       },
     },
@@ -219,7 +257,9 @@ const stations = {
         headline: 'Optimize Equipment and Tooling Performance',
         body:
           'Certified processes, high-performance tooling, TooLink and expert technical support help improve repeatability, reduce downtime and extend the value of your equipment.',
-        videos: [],
+        videos: [
+          { title: 'See How Midlands Packaging Is Advancing Quality and Efficiency with BOBST', provider: 'vimeo', embedId: '1089981976' },
+        ],
       },
       'labels': {
         blurb:
@@ -227,7 +267,9 @@ const stations = {
         headline: 'Keep Your Label Operation Moving Forward',
         body:
           'Modular upgrades, retrofits and lifecycle services help label converters respond to changing market requirements and introduce new capabilities without replacing their entire production platform.',
-        videos: [],
+        videos: [
+          { title: 'See How Midlands Packaging Is Advancing Quality and Efficiency with BOBST', provider: 'vimeo', embedId: '1089981976' },
+        ],
       },
     },
   },
@@ -450,16 +492,18 @@ function renderVideoCarousel(videos) {
       <button class="video-carousel__arrow video-carousel__arrow--prev" aria-label="Previous video">${icons.arrowLeft}</button>
       <div class="video-carousel__stage">
         ${videos
-          .map(
-            (v, i) => `
-          <div class="video-carousel__item" data-index="${i}" data-src="${v.src}">
-            <img class="video-carousel__poster" src="${v.poster}" alt="${v.title}" loading="lazy" />
+          .map((v, i) => {
+            const embedUrl = getVideoEmbedUrl(v);
+            const srcAttr = embedUrl ? `data-embed-url="${embedUrl}"` : `data-src="${v.src}"`;
+            return `
+          <div class="video-carousel__item" data-index="${i}" ${srcAttr}>
+            <img class="video-carousel__poster" src="${getVideoPoster(v)}" alt="${v.title}" loading="lazy" />
             <div class="video-carousel__scrim"></div>
             <div class="video-carousel__play">${icons.playCircle}</div>
             <div class="video-carousel__title">${v.title}</div>
           </div>
-        `
-          )
+        `;
+          })
           .join('')}
       </div>
       <button class="video-carousel__arrow video-carousel__arrow--next" aria-label="Next video">${icons.arrowRight}</button>
@@ -712,7 +756,11 @@ function initVideoCarousels() {
       item.addEventListener('click', () => {
         if (i === active) {
           const title = item.querySelector('.video-carousel__title')?.textContent || '';
-          openFullscreenVideo(item.dataset.src, title);
+          if (item.dataset.embedUrl) {
+            openFullscreenVideo(item.dataset.embedUrl, title, true);
+          } else {
+            openFullscreenVideo(item.dataset.src, title, false);
+          }
         } else {
           goTo(i);
         }
@@ -823,7 +871,7 @@ function closeFullscreenVideo() {
   document.body.style.overflow = '';
 }
 
-function openFullscreenVideo(src, title) {
+function openFullscreenVideo(src, title, isEmbed = false) {
   closeFullscreenVideo();
 
   const overlay = document.createElement('div');
@@ -831,7 +879,11 @@ function openFullscreenVideo(src, title) {
   overlay.id = 'video-overlay';
   overlay.innerHTML = `
     <button class="video-overlay__close" aria-label="Close video">${icons.close}</button>
-    <video class="video-overlay__video" src="${src}" title="${title}" controls autoplay playsinline></video>
+    ${
+      isEmbed
+        ? `<iframe class="video-overlay__video video-overlay__video--embed" src="${src}" title="${title}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`
+        : `<video class="video-overlay__video" src="${src}" title="${title}" controls autoplay playsinline></video>`
+    }
   `;
   document.body.appendChild(overlay);
   document.body.style.overflow = 'hidden';
@@ -843,7 +895,7 @@ function openFullscreenVideo(src, title) {
   }
 
   function close() {
-    video.pause();
+    video?.pause();
     if (document.fullscreenElement) {
       document.exitFullscreen?.().catch(() => {});
     }
