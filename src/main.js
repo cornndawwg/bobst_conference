@@ -10,6 +10,7 @@ const icons = {
   close: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
   playCircle: `<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>`,
   zoomIn: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>`,
+  clock: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>`,
 };
 
 // ============================================================
@@ -449,6 +450,7 @@ const stations = {
         headline: 'Connect Flexible Packaging Production',
         body:
           'Explore how BOBST Connect transforms real-time machine data into actionable insights, helping optimize energy consumption, reduce downtime and improve color consistency across operations.',
+        liveDemo: 'Live Demo at 10am & 3pm',
         videos: [
           { title: 'BOBST Connect — Recorded Demo', provider: 'vimeo', embedId: '949042871' },
         ],
@@ -459,6 +461,7 @@ const stations = {
         headline: 'Connect Machines, Tools and Production Data',
         body:
           'See how BOBST Connect and TooLink improve visibility across equipment, jobs and tooling lifecycles — helping converters simplify makeready, reduce waste and maximize machine performance.',
+        liveDemo: 'Live Demo at 10am & 3pm',
         videos: [
           { title: 'BOBST Connect — Overview and Success Story', provider: 'vimeo', embedId: '949042871' },
         ],
@@ -469,6 +472,7 @@ const stations = {
         headline: 'Create a More Connected Label Workflow',
         body:
           'Discover how BOBST Connect transforms real-time machine data into actionable linear meter usage insights — helping converters simplify makeready, reduce downtime and optimize machine profitability.',
+        liveDemo: 'Live Demo at 10am & 3pm',
         videos: [
           { title: 'BOBST Connect — Overview and Success Story', provider: 'vimeo', embedId: '949042871' },
         ],
@@ -746,6 +750,7 @@ function renderMarketDetail(stationSlug, marketSlug) {
             <div class="detail__category">${station.category} — ${MARKET_TITLES[marketSlug] || marketSlug}</div>
             <h1 class="detail__title"><b>${market.headline}</b></h1>
             <p class="detail__intro">${market.body}</p>
+            ${market.liveDemo ? `<div class="detail__live-demo">${icons.clock}<span>${market.liveDemo}</span></div>` : ''}
             ${renderVideoCarousel(market.videos)}
           </div>
         </div>

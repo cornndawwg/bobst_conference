@@ -609,6 +609,29 @@ button {
   font-weight: 700;
 }
 
+.detail__live-demo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+  padding: var(--space-2) var(--space-4);
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  animation: live-demo-pulse 2.4s ease-in-out infinite;
+}
+
+.detail__live-demo svg {
+  flex-shrink: 0;
+}
+
+@keyframes live-demo-pulse {
+  0%, 100% { background: rgba(219, 7, 32, 0.06); }
+  50% { background: rgba(219, 7, 32, 0.14); }
+}
+
 /* ---- CONTENT SECTIONS ---- */
 .content-section {
   padding: var(--space-20) var(--space-8);
