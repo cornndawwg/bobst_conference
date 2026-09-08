@@ -108,7 +108,13 @@ const stations = {
         body:
           'Standardized tooling, connected production processes and workforce training help converters reduce makeready time, improve repeatability and maintain performance across every job. High Performance Tooling and TooLink together can reduce set-up time and increase output by up to 30%.',
         videos: [
-          { title: 'Zumbiel and BOBST', provider: 'vimeo', embedId: '1093624953' },
+          {
+            title: 'Zumbiel and BOBST',
+            provider: 'vimeo',
+            embedId: '1093624953',
+            embedHash: '5f4c0ef396',
+            poster: 'https://i.vimeocdn.com/video/2027022860-409eb7beeef9265e367f548f842755fa3e2ca4e4ac9c0960b2b3b327374fc57e-d_1280x720?region=us',
+          },
           {
             title: 'Tooling, TooLink and CITO — Proof Points',
             poster: '/posters/productivity-solutions/folding-carton/tooling-toolink-cito-proof-points.jpg',
@@ -375,7 +381,13 @@ const stations = {
         body:
           'Certified processes, high-performance tooling, TooLink and expert technical support help improve repeatability, reduce downtime and extend the value of your equipment. BOBST Remanufacturing can increase machine productivity by up to 15%.',
         videos: [
-          { title: 'See How Midlands Packaging Is Advancing Quality and Efficiency with BOBST', provider: 'vimeo', embedId: '1089981976' },
+          {
+            title: 'See How Midlands Packaging Is Advancing Quality and Efficiency with BOBST',
+            provider: 'vimeo',
+            embedId: '1089981976',
+            embedHash: '622dc8d7c6',
+            poster: 'https://i.vimeocdn.com/video/2022505467-284fd9cab0c714e0e7a2f2c44ede12504a85e513fee7a094b46bfabc8020b0ce-d_1280x720?region=us',
+          },
         ],
         slides: [
           {
@@ -395,7 +407,13 @@ const stations = {
         body:
           'Modular upgrades, retrofits and lifecycle services help label converters respond to changing market requirements and introduce new capabilities without replacing their entire production platform. BOBST Services can cut downtime by up to 60% and resolve up to 80% of issues remotely through Helpline and BOBST Connect.',
         videos: [
-          { title: 'See How Midlands Packaging Is Advancing Quality and Efficiency with BOBST', provider: 'vimeo', embedId: '1089981976' },
+          {
+            title: 'See How Midlands Packaging Is Advancing Quality and Efficiency with BOBST',
+            provider: 'vimeo',
+            embedId: '1089981976',
+            embedHash: '622dc8d7c6',
+            poster: 'https://i.vimeocdn.com/video/2022505467-284fd9cab0c714e0e7a2f2c44ede12504a85e513fee7a094b46bfabc8020b0ce-d_1280x720?region=us',
+          },
           {
             title: 'BOBST Services — Connected to Power Your Performance',
             poster: '/posters/lifecycle-performance-services/labels/service-performance-overview.jpg',
