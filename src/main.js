@@ -22,6 +22,14 @@ const MARKET_TITLES = {
   'corrugated': 'Corrugated',
 };
 
+// Shared market photography used on the market cards across every station
+// home page (one representative image per market — no per-station variants).
+const MARKET_IMAGES = {
+  'flexible-packaging': '/images/cards/flexible-packaging.jpg',
+  'folding-carton': '/images/cards/folding-carton.jpg',
+  'labels': '/images/cards/labels.jpg',
+};
+
 // ============================================================
 // Video helpers — a video entry is either a locally-hosted file
 // ({ src, poster }) or a hosted embed ({ provider: 'vimeo'|'youtube',
@@ -74,17 +82,28 @@ const stations = {
           'Reduce setup time and operator dependency through automated press processes, faster changeovers and more repeatable production.',
         headline: 'Simplify Flexible Packaging Production',
         body:
-          'Automated solutions such as smartGPS and connected end-to-end workflows help reduce setup time, operator dependency and process variation while improving overall press performance.',
-        videos: [],
+          'Automated solutions such as smartGPS and connected end-to-end workflows help reduce setup time, operator dependency and process variation while improving overall press performance. BOBST smartGPS delivers up to a 30% productivity increase without changing production speed.',
+        videos: [
+          {
+            title: 'BOBST smartGPS — Graphic Positioning System for CI Flexo',
+            poster: '/posters/productivity-solutions/flexible-packaging/smartgps-ci-flexo-press.jpg',
+            src: '/videos/productivity-solutions/flexible-packaging/smartgps-ci-flexo-press.mp4',
+          },
+        ],
       },
       'folding-carton': {
         blurb:
           'Improve makeready and production performance through standardized tooling, integrated workflows and certified processes.',
         headline: 'Improve Folding Carton Productivity',
         body:
-          'Standardized tooling, connected production processes and workforce training help converters reduce makeready time, improve repeatability and maintain performance across every job.',
+          'Standardized tooling, connected production processes and workforce training help converters reduce makeready time, improve repeatability and maintain performance across every job. High Performance Tooling and TooLink together can reduce set-up time and increase output by up to 30%.',
         videos: [
           { title: 'Zumbiel and BOBST', provider: 'vimeo', embedId: '1093624953' },
+          {
+            title: 'Tooling, TooLink and CITO — Proof Points',
+            poster: '/posters/productivity-solutions/folding-carton/tooling-toolink-cito-proof-points.jpg',
+            src: '/videos/productivity-solutions/folding-carton/tooling-toolink-cito-proof-points.mp4',
+          },
         ],
       },
       'labels': {
@@ -129,8 +148,14 @@ const stations = {
           'Maintain stable color and process performance through oneECG, intelligent color management and advanced production controls.',
         headline: 'Achieve Stable, Repeatable Print Quality',
         body:
-          'oneECG, Co-efficient color management and advanced process controls help flexible packaging converters achieve predictable color, faster setup and greater consistency across production runs.',
-        videos: [],
+          'oneECG, Co-efficient color management and advanced process controls help flexible packaging converters achieve predictable color, faster setup and greater consistency across production runs. oneECG extends Pantone book matching from 65% to 95%+ while cutting start-up waste by 35%.',
+        videos: [
+          {
+            title: 'oneECG — Digitalizing Color Consistency',
+            poster: '/posters/quality-color-consistency/flexible-packaging/oneecg-proof-points.jpg',
+            src: '/videos/quality-color-consistency/flexible-packaging/oneecg-proof-points.mp4',
+          },
+        ],
       },
       'folding-carton': {
         blurb:
@@ -143,6 +168,11 @@ const stations = {
             title: 'ACCUPLATEN — Faster Die-Cutting Setup',
             poster: '/posters/quality-color-consistency/folding-carton/accuplaten-speed-patching.jpg',
             src: '/videos/quality-color-consistency/folding-carton/accuplaten-speed-patching.mp4',
+          },
+          {
+            title: 'Drupa Proof Points — Die Cutting',
+            poster: '/posters/quality-color-consistency/folding-carton/drupa-proof-points-die-cutting.jpg',
+            src: '/videos/quality-color-consistency/folding-carton/drupa-proof-points-die-cutting.mp4',
           },
           { title: 'Tooling with Patrick and Brian', provider: 'vimeo', embedId: '1080758081' },
           { title: 'How TAVO Packaging Is Delivering More with BOBST', provider: 'youtube', embedId: '-pvVuTX9S8A' },
@@ -167,9 +197,12 @@ const stations = {
           'Deliver consistent color and reliable quality across digital, flexo and All-in-One label production.',
         headline: 'Maintain Color Across Every Label Job',
         body:
-          'Integrated color management, inspection and process-control solutions help label converters maintain predictable results across changing substrates, run lengths and production technologies.',
+          'Integrated color management, inspection and process-control solutions help label converters maintain predictable results across changing substrates, run lengths and production technologies. Converters running oneECG at scale report up to a 67% output increase per year with 86% less time lost during set-up.',
         videos: [
           { title: 'BOBST Connect — Quality Reports in the Cloud', poster: '/posters/quality-color-consistency/labels/techproofpoint-connect-quality-reports.jpg', src: '/videos/quality-color-consistency/labels/techproofpoint-connect-quality-reports.mp4' },
+          { title: 'oneECG — Digitalizing Color Information for Labels', poster: '/posters/quality-color-consistency/labels/techproofpoint-oneecg-digitizing-color.jpg', src: '/videos/quality-color-consistency/labels/techproofpoint-oneecg-digitizing-color.mp4' },
+          { title: 'Animation — BOBST oneECG for Labels', poster: '/posters/quality-color-consistency/labels/animation-oneecg-labels.jpg', src: '/videos/quality-color-consistency/labels/animation-oneecg-labels.mp4' },
+          { title: 'Label Specialties — oneECG in Action', poster: '/posters/quality-color-consistency/labels/label-specialties-oneecg.jpg', src: '/videos/quality-color-consistency/labels/label-specialties-oneecg.mp4' },
           { title: 'ACCUCHECK B1 — Introduction', poster: '/posters/quality-color-consistency/labels/accucheck-b1-introduction.jpg', src: '/videos/quality-color-consistency/labels/accucheck-b1-introduction.mp4' },
           { title: 'ACCUCHECK B2 — Inspection', poster: '/posters/quality-color-consistency/labels/accucheck-b2-inspection.jpg', src: '/videos/quality-color-consistency/labels/accucheck-b2-inspection.mp4' },
           { title: 'ACCUCHECK B3 — Registration', poster: '/posters/quality-color-consistency/labels/accucheck-b3-registration.jpg', src: '/videos/quality-color-consistency/labels/accucheck-b3-registration.mp4' },
@@ -202,8 +235,14 @@ const stations = {
           'Develop recyclable, paper-based and lightweight structures using advanced coating, metallizing and barrier technologies.',
         headline: 'Advance Sustainable Packaging Applications',
         body:
-          'BOBST barrier, coating and metallizing technologies support the development of recyclable, paper-based and lightweight structures created in partnership with industry experts.',
-        videos: [],
+          'BOBST barrier, coating and metallizing technologies support the development of recyclable, paper-based and lightweight structures created in partnership with industry experts. The oneBARRIER family — including PrimeCycle and FibreCycle — is built around mono-material and fibre-based structures designed for recyclability.',
+        videos: [
+          {
+            title: 'oneBARRIER — Sustainable Barrier Solutions',
+            poster: '/posters/sustainability-innovation/flexible-packaging/onebarrier-proof-points.jpg',
+            src: '/videos/sustainability-innovation/flexible-packaging/onebarrier-proof-points.mp4',
+          },
+        ],
       },
       'folding-carton': {
         blurb:
@@ -232,8 +271,14 @@ const stations = {
           'Explore digitally produced multilayer labels, expanded color capabilities and new applications designed for greater production efficiency.',
         headline: 'Expand Label Application Possibilities',
         body:
-          'Digital, flexo and All-in-One technologies support innovative label applications while helping converters optimize materials, reduce waste and respond to evolving market requirements.',
-        videos: [],
+          'Digital, flexo and All-in-One technologies support innovative label applications while helping converters optimize materials, reduce waste and respond to evolving market requirements. BOBST FLEXJET brings fully digital multilayer label production to a single pass, cutting start-up time by up to 60% and waste by up to 30% while doubling output.',
+        videos: [
+          {
+            title: 'BOBST FLEXJET — Simplifying Multilayer Labels Production',
+            poster: '/posters/sustainability-innovation/labels/flexjet-multilayer-labels.jpg',
+            src: '/videos/sustainability-innovation/labels/flexjet-multilayer-labels.mp4',
+          },
+        ],
       },
     },
   },
@@ -248,15 +293,29 @@ const stations = {
           'Maintain performance and adapt to changing requirements through preventive maintenance, technical support, upgrades and retrofits.',
         headline: 'Sustain Flexible Packaging Performance',
         body:
-          'BOBST service, maintenance, remote support and tailored upgrades help protect equipment availability and keep production performing throughout the machine lifecycle.',
+          'BOBST service, maintenance, remote support and tailored upgrades help protect equipment availability and keep production performing throughout the machine lifecycle. Customers running BOBST Connect and Maintenance Plus have reported machine availability as high as 98.5%.',
         videos: [],
+        slides: [
+          {
+            title: 'On the Shop Floor with BOBST Connect',
+            image: '/images/lifecycle-performance-services/flexible-packaging/production-line-close-up.jpg',
+          },
+          {
+            title: 'Reviewing Real-Time Performance Data',
+            image: '/images/lifecycle-performance-services/flexible-packaging/bobst-connect-dashboard-review.jpg',
+          },
+          {
+            title: 'BOBST Connect — Anywhere, Anytime',
+            image: '/images/lifecycle-performance-services/flexible-packaging/bobst-connect-laptop.jpg',
+          },
+        ],
       },
       'folding-carton': {
         blurb:
           'Improve equipment and tooling performance with certified die makers, high-performance tooling, TooLink and expert lifecycle support.',
         headline: 'Optimize Equipment and Tooling Performance',
         body:
-          'Certified processes, high-performance tooling, TooLink and expert technical support help improve repeatability, reduce downtime and extend the value of your equipment.',
+          'Certified processes, high-performance tooling, TooLink and expert technical support help improve repeatability, reduce downtime and extend the value of your equipment. BOBST Remanufacturing can increase machine productivity by up to 15%.',
         videos: [
           { title: 'See How Midlands Packaging Is Advancing Quality and Efficiency with BOBST', provider: 'vimeo', embedId: '1089981976' },
         ],
@@ -266,9 +325,14 @@ const stations = {
           'Protect your investment with modular upgrades, tailored retrofits and service solutions that evolve with your production requirements.',
         headline: 'Keep Your Label Operation Moving Forward',
         body:
-          'Modular upgrades, retrofits and lifecycle services help label converters respond to changing market requirements and introduce new capabilities without replacing their entire production platform.',
+          'Modular upgrades, retrofits and lifecycle services help label converters respond to changing market requirements and introduce new capabilities without replacing their entire production platform. BOBST Services can cut downtime by up to 60% and resolve up to 80% of issues remotely through Helpline and BOBST Connect.',
         videos: [
           { title: 'See How Midlands Packaging Is Advancing Quality and Efficiency with BOBST', provider: 'vimeo', embedId: '1089981976' },
+          {
+            title: 'BOBST Services — Connected to Power Your Performance',
+            poster: '/posters/lifecycle-performance-services/labels/service-performance-overview.jpg',
+            src: '/videos/lifecycle-performance-services/labels/service-performance-overview.mp4',
+          },
         ],
       },
     },
@@ -284,24 +348,30 @@ const stations = {
           'Connect production data, job recipes, energy insights and remote support to improve visibility and performance across flexible packaging operations.',
         headline: 'Connect Flexible Packaging Production',
         body:
-          'Explore digital demonstrations covering real-time performance, recipe management, energy and waste insights, maintenance information and remote technical support.',
-        videos: [],
+          'Explore how BOBST Connect transforms real-time machine data into actionable insights, helping optimize energy consumption, reduce downtime and improve color consistency across operations.',
+        videos: [
+          { title: 'BOBST Connect — Recorded Demo', provider: 'vimeo', embedId: '949042871' },
+        ],
       },
       'folding-carton': {
         blurb:
           'Use connected machine and tooling information to improve makeready, monitor performance and make faster, data-driven decisions.',
         headline: 'Connect Machines, Tools and Production Data',
         body:
-          'See how BOBST Connect and TooLink improve visibility across equipment, jobs and tooling—helping converters simplify makeready and support more consistent production.',
-        videos: [],
+          'See how BOBST Connect and TooLink improve visibility across equipment, jobs and tooling lifecycles — helping converters simplify makeready, reduce waste and maximize machine performance.',
+        videos: [
+          { title: 'BOBST Connect — Overview and Success Story', provider: 'vimeo', embedId: '949042871' },
+        ],
       },
       'labels': {
         blurb:
           'Connect digital, flexo and All-in-One production to improve job management, process visibility and operational responsiveness.',
         headline: 'Create a More Connected Label Workflow',
         body:
-          'Explore how connected solutions support job management, production monitoring and performance analysis across digital, flexo and All-in-One label production.',
-        videos: [],
+          'Discover how BOBST Connect transforms real-time machine data into actionable linear meter usage insights — helping converters simplify makeready, reduce downtime and optimize machine profitability.',
+        videos: [
+          { title: 'BOBST Connect — Overview and Success Story', provider: 'vimeo', embedId: '949042871' },
+        ],
       },
       'corrugated': {
         blurb:
@@ -362,9 +432,13 @@ function renderCardsSection({ label, title, cards }) {
       (card, i) => `
     <article class="card" data-href="${card.href}">
       <div class="card__image-wrapper">
-        <div class="card__image-placeholder">
-          <div class="card__image-placeholder-icon">${icons.image}</div>
-        </div>
+        ${
+          card.image
+            ? `<img class="card__image" src="${card.image}" alt="${card.title}" loading="lazy" />`
+            : `<div class="card__image-placeholder">
+                <div class="card__image-placeholder-icon">${icons.image}</div>
+              </div>`
+        }
         <div class="card__image-overlay"></div>
       </div>
       <div class="card__body">
@@ -458,6 +532,7 @@ function renderStationHome(stationSlug) {
       href: `#/s/${stationSlug}/${marketSlug}`,
       title: MARKET_TITLES[marketSlug] || marketSlug,
       description: market.blurb,
+      image: MARKET_IMAGES[marketSlug],
     };
   });
 
