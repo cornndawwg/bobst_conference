@@ -20,7 +20,6 @@ const MARKET_TITLES = {
   'flexible-packaging': 'Flexible Packaging',
   'folding-carton': 'Folding Carton',
   'labels': 'Labels',
-  'corrugated': 'Corrugated',
 };
 
 // Shared market photography used on the market cards across every station
@@ -477,14 +476,6 @@ const stations = {
           { title: 'BOBST Connect — Overview and Success Story', provider: 'vimeo', embedId: '949042871' },
         ],
       },
-      'corrugated': {
-        blurb:
-          'Gain greater visibility into machine performance, production activity and service needs to support more efficient corrugated operations.',
-        headline: 'Turn Corrugated Production Data into Action',
-        body:
-          'Discover digital solutions that provide greater visibility into equipment performance, production activity and service requirements, helping teams identify opportunities for continued improvement.',
-        videos: [],
-      },
     },
   },
 };
@@ -609,7 +600,7 @@ function renderHub() {
               Improve Performance
             </h1>
             <p class="hero__subtitle">
-              Choose a station below to explore BOBST solutions across Flexible Packaging, Folding Carton, Labels and Corrugated.
+              Choose a station below to explore BOBST solutions across Flexible Packaging, Folding Carton and Labels.
             </p>
           </div>
         </section>
