@@ -90,6 +90,16 @@ const stations = {
             src: '/videos/productivity-solutions/flexible-packaging/smartgps-ci-flexo-press.mp4',
           },
         ],
+        slides: [
+          {
+            title: 'smartGPS — SAMM 3.0 Mounting Unit',
+            image: '/images/productivity-solutions/flexible-packaging/smartgps-samm-unit.jpg',
+          },
+          {
+            title: 'smartGPS Live on the Show Floor',
+            image: '/images/productivity-solutions/flexible-packaging/smartgps-live-demo-floor.jpg',
+          },
+        ],
       },
       'folding-carton': {
         blurb:
@@ -103,6 +113,16 @@ const stations = {
             title: 'Tooling, TooLink and CITO — Proof Points',
             poster: '/posters/productivity-solutions/folding-carton/tooling-toolink-cito-proof-points.jpg',
             src: '/videos/productivity-solutions/folding-carton/tooling-toolink-cito-proof-points.mp4',
+          },
+        ],
+        slides: [
+          {
+            title: 'High Performance Tooling — Precision Detail',
+            image: '/images/productivity-solutions/folding-carton/tooling-close-up.jpg',
+          },
+          {
+            title: 'Loading a High Performance Die Plate',
+            image: '/images/productivity-solutions/folding-carton/tooling-plate-loading.jpg',
           },
         ],
       },
@@ -133,6 +153,21 @@ const stations = {
             provider: 'youtube',
             embedId: 'p-n1VRqWWn8',
           },
+          {
+            title: 'MASTER M6 — Exceptionally Productive',
+            poster: '/posters/productivity-solutions/labels/master-m6-vision-pillars.jpg',
+            src: '/videos/productivity-solutions/labels/master-m6-vision-pillars.mp4',
+          },
+          {
+            title: 'DIGIFLEXO in Action — Automated Register & Pressure Control',
+            poster: '/posters/productivity-solutions/labels/digiflexo-automation-demo.jpg',
+            src: '/videos/productivity-solutions/labels/digiflexo-automation-demo.mp4',
+          },
+          {
+            title: 'All-in-One Modular Press — Build Your Line',
+            poster: '/posters/productivity-solutions/labels/all-in-one-modular-press.jpg',
+            src: '/videos/productivity-solutions/labels/all-in-one-modular-press.mp4',
+          },
         ],
       },
     },
@@ -154,6 +189,12 @@ const stations = {
             title: 'oneECG — Digitalizing Color Consistency',
             poster: '/posters/quality-color-consistency/flexible-packaging/oneecg-proof-points.jpg',
             src: '/videos/quality-color-consistency/flexible-packaging/oneecg-proof-points.mp4',
+          },
+        ],
+        slides: [
+          {
+            title: 'oneECG — 95%+ Pantone Book Match',
+            image: '/images/quality-color-consistency/flexible-packaging/oneecg-pantone-match-review.jpg',
           },
         ],
       },
@@ -243,6 +284,12 @@ const stations = {
             src: '/videos/sustainability-innovation/flexible-packaging/onebarrier-proof-points.mp4',
           },
         ],
+        slides: [
+          {
+            title: 'oneBARRIER & Partners — Innovating Together',
+            image: '/images/sustainability-innovation/flexible-packaging/onebarrier-partner-discussion.jpg',
+          },
+        ],
       },
       'folding-carton': {
         blurb:
@@ -277,6 +324,17 @@ const stations = {
             title: 'BOBST FLEXJET — Simplifying Multilayer Labels Production',
             poster: '/posters/sustainability-innovation/labels/flexjet-multilayer-labels.jpg',
             src: '/videos/sustainability-innovation/labels/flexjet-multilayer-labels.mp4',
+          },
+          {
+            title: 'Expand Your Label Production',
+            poster: '/posters/sustainability-innovation/labels/expand-label-production.jpg',
+            src: '/videos/sustainability-innovation/labels/expand-label-production.mp4',
+          },
+        ],
+        slides: [
+          {
+            title: 'Multilayer Extended Content Label',
+            image: '/images/sustainability-innovation/labels/multilayer-extended-content-label.jpg',
           },
         ],
       },
@@ -319,6 +377,16 @@ const stations = {
         videos: [
           { title: 'See How Midlands Packaging Is Advancing Quality and Efficiency with BOBST', provider: 'vimeo', embedId: '1089981976' },
         ],
+        slides: [
+          {
+            title: 'Reviewing Real-Time Performance Data',
+            image: '/images/lifecycle-performance-services/folding-carton/bobst-connect-performance-review.jpg',
+          },
+          {
+            title: 'A Long-Term View of Your Production Floor',
+            image: '/images/lifecycle-performance-services/folding-carton/plant-overview.jpg',
+          },
+        ],
       },
       'labels': {
         blurb:
@@ -332,6 +400,20 @@ const stations = {
             title: 'BOBST Services — Connected to Power Your Performance',
             poster: '/posters/lifecycle-performance-services/labels/service-performance-overview.jpg',
             src: '/videos/lifecycle-performance-services/labels/service-performance-overview.mp4',
+          },
+        ],
+        slides: [
+          {
+            title: 'BOBST DIGITAL MASTER 340 — Upgradable by Design',
+            image: '/images/lifecycle-performance-services/labels/digital-master-340.jpg',
+          },
+          {
+            title: 'Expert Field Service, On Site',
+            image: '/images/lifecycle-performance-services/labels/field-service-technician.jpg',
+          },
+          {
+            title: 'From Beverage to Personal Care — Every Label Application',
+            image: '/images/lifecycle-performance-services/labels/label-application-range.jpg',
           },
         ],
       },

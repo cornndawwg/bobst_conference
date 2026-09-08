@@ -1,18 +1,14 @@
 import { chromium } from 'playwright';
 
 const routes = [
-  '#/s/productivity-solutions',
   '#/s/productivity-solutions/flexible-packaging',
   '#/s/productivity-solutions/folding-carton',
+  '#/s/productivity-solutions/labels',
   '#/s/quality-color-consistency/flexible-packaging',
-  '#/s/quality-color-consistency/folding-carton',
-  '#/s/quality-color-consistency/labels',
   '#/s/sustainability-innovation/flexible-packaging',
   '#/s/sustainability-innovation/labels',
-  '#/s/lifecycle-performance-services/flexible-packaging',
+  '#/s/lifecycle-performance-services/folding-carton',
   '#/s/lifecycle-performance-services/labels',
-  '#/s/digital-solutions/flexible-packaging',
-  '#/s/digital-solutions/folding-carton',
 ];
 
 const browser = await chromium.launch();
@@ -27,10 +23,9 @@ for (const route of routes) {
   await page.waitForTimeout(400);
   const videoCount = await page.locator('.video-carousel__item').count();
   const slideCount = await page.locator('.slide-deck__slide').count();
-  const cardImgCount = await page.locator('.card__image').count();
-  console.log(`${route} -> videos=${videoCount} slides=${slideCount} cardImages=${cardImgCount}`);
+  console.log(`${route} -> videos=${videoCount} slides=${slideCount}`);
   const safeName = route.replace(/[/#]/g, '_');
-  await page.screenshot({ path: `screenshots/newcontent${safeName}.png`, fullPage: true });
+  await page.screenshot({ path: `screenshots/round2${safeName}.png`, fullPage: true });
   if (errors.length) console.log('  ERRORS:', errors.slice(0, 5));
   await page.close();
 }
