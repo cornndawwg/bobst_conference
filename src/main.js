@@ -175,6 +175,20 @@ const stations = {
             src: '/videos/productivity-solutions/labels/all-in-one-modular-press.mp4',
           },
         ],
+        slides: [
+          {
+            title: 'BOBST DIGITAL MASTER 340 — 2026 EDP Award Winner',
+            image: '/images/productivity-solutions/labels/digital-master-340-edp-award.jpg',
+          },
+          {
+            title: 'DIGITAL MASTER 510 — Ultimate All-in-One with FLEXJET',
+            image: '/images/productivity-solutions/labels/digital-master-510-infographic.jpg',
+          },
+          {
+            title: 'Mouvent — High-Speed Rewinder in Action',
+            image: '/images/productivity-solutions/labels/mouvent-rewinder.jpg',
+          },
+        ],
       },
     },
   },
@@ -221,7 +235,11 @@ const stations = {
             poster: '/posters/quality-color-consistency/folding-carton/drupa-proof-points-die-cutting.jpg',
             src: '/videos/quality-color-consistency/folding-carton/drupa-proof-points-die-cutting.mp4',
           },
-          { title: 'Tooling with Patrick and Brian', provider: 'vimeo', embedId: '1080758081' },
+          {
+            title: 'Tooling with Patrick and Brian',
+            poster: '/posters/quality-color-consistency/folding-carton/tooling-patrick-brian.jpg',
+            src: '/videos/quality-color-consistency/folding-carton/tooling-patrick-brian.mp4',
+          },
           { title: 'How TAVO Packaging Is Delivering More with BOBST', provider: 'youtube', embedId: '-pvVuTX9S8A' },
         ],
         slides: [
@@ -268,6 +286,28 @@ const stations = {
             embedId: 'OG2HgO17sHY',
           },
         ],
+        slides: [
+          {
+            title: 'THALIA UV Digital Inks — Full Color Gamut',
+            image: '/images/quality-color-consistency/labels/thalia-uv-digital-inks.jpg',
+          },
+          {
+            title: 'ACCUCHECK — Inline Quality Inspection',
+            image: '/images/quality-color-consistency/labels/accucheck-inline-inspection.jpg',
+          },
+          {
+            title: 'oneECG Color Match — Shower Gel Application',
+            image: '/images/quality-color-consistency/labels/oneecg-showergel-application.jpg',
+          },
+          {
+            title: 'oneECG Color Match — Yogurt Application',
+            image: '/images/quality-color-consistency/labels/oneecg-yogurt-application.jpg',
+          },
+          {
+            title: 'Grand Opening — New Label Line at Lizza',
+            image: '/images/quality-color-consistency/labels/grand-opening-lizza.jpg',
+          },
+        ],
       },
     },
   },
@@ -303,7 +343,13 @@ const stations = {
         headline: 'Produce More with Fewer Resources',
         body:
           'Energy monitoring, production insights and optimized tooling help folding carton converters reduce waste, make better operating decisions and improve resource efficiency. The Pack Energy Efficiency module reduces total machine energy consumption by up to 20% on folding carton applications.',
-        videos: [],
+        videos: [
+          {
+            title: 'NOVAFOIL 106 — Gravure Choquet Inc.',
+            poster: '/posters/sustainability-innovation/folding-carton/novafoil-106-gravure-choquet.jpg',
+            src: '/videos/sustainability-innovation/folding-carton/novafoil-106-gravure-choquet.mp4',
+          },
+        ],
         slides: [
           {
             title: 'MASTERCUT 106 PER — Pack Energy Efficiency',
@@ -358,7 +404,13 @@ const stations = {
         headline: 'Sustain Flexible Packaging Performance',
         body:
           'BOBST service, maintenance, remote support and tailored upgrades help protect equipment availability and keep production performing throughout the machine lifecycle. Customers running BOBST Connect and Maintenance Plus have reported machine availability as high as 98.5%.',
-        videos: [],
+        videos: [
+          {
+            title: 'BOBST Services — Protect Your Investment',
+            poster: '/posters/lifecycle-performance-services/flexible-packaging/bobst-services-overview.jpg',
+            src: '/videos/lifecycle-performance-services/flexible-packaging/bobst-services-overview.mp4',
+          },
+        ],
         slides: [
           {
             title: 'On the Shop Floor with BOBST Connect',
@@ -451,7 +503,37 @@ const stations = {
           'Explore how BOBST Connect transforms real-time machine data into actionable insights, helping optimize energy consumption, reduce downtime and improve color consistency across operations.',
         liveDemo: 'Live Demo at 10am & 3pm',
         videos: [
+          {
+            title: 'BOBST LOUPE — Flexible Packaging',
+            poster: '/posters/digital-solutions/flexible-packaging/bobst-loupe-promo.jpg',
+            src: '/videos/digital-solutions/flexible-packaging/bobst-loupe-promo.mp4',
+          },
           { title: 'BOBST Connect — Recorded Demo', provider: 'vimeo', embedId: '949042871' },
+          {
+            title: 'Equipment Monitoring — Live Demo',
+            poster: '/posters/digital-solutions/flexible-packaging/equipment-monitoring.jpg',
+            src: '/videos/digital-solutions/flexible-packaging/equipment-monitoring.mp4',
+          },
+          {
+            title: 'Performance Management — Live Demo',
+            poster: '/posters/digital-solutions/flexible-packaging/performance-management.jpg',
+            src: '/videos/digital-solutions/flexible-packaging/performance-management.mp4',
+          },
+          {
+            title: 'Performance Management — Historical Data',
+            poster: '/posters/digital-solutions/flexible-packaging/performance-management-historical.jpg',
+            src: '/videos/digital-solutions/flexible-packaging/performance-management-historical.mp4',
+          },
+          {
+            title: 'Downtime Analysis — Live Demo',
+            poster: '/posters/digital-solutions/flexible-packaging/downtime-analysis.jpg',
+            src: '/videos/digital-solutions/flexible-packaging/downtime-analysis.mp4',
+          },
+          {
+            title: 'Shop Floor Overview — Live Demo',
+            poster: '/posters/digital-solutions/flexible-packaging/shop-floor-overview.jpg',
+            src: '/videos/digital-solutions/flexible-packaging/shop-floor-overview.mp4',
+          },
         ],
       },
       'folding-carton': {
@@ -462,7 +544,42 @@ const stations = {
           'See how BOBST Connect and TooLink improve visibility across equipment, jobs and tooling lifecycles — helping converters simplify makeready, reduce waste and maximize machine performance.',
         liveDemo: 'Live Demo at 10am & 3pm',
         videos: [
+          {
+            title: 'BOBST LOUPE — Folding Carton',
+            poster: '/posters/digital-solutions/folding-carton/bobst-loupe-promo.jpg',
+            src: '/videos/digital-solutions/folding-carton/bobst-loupe-promo.mp4',
+          },
           { title: 'BOBST Connect — Overview and Success Story', provider: 'vimeo', embedId: '949042871' },
+          {
+            title: 'Equipment Monitoring — Overview',
+            poster: '/posters/digital-solutions/folding-carton/equipment-monitoring-overview.jpg',
+            src: '/videos/digital-solutions/folding-carton/equipment-monitoring-overview.mp4',
+          },
+          {
+            title: 'Equipment Monitoring — Live View',
+            poster: '/posters/digital-solutions/folding-carton/equipment-monitoring-live.jpg',
+            src: '/videos/digital-solutions/folding-carton/equipment-monitoring-live.mp4',
+          },
+          {
+            title: 'Equipment Monitoring — Historical Data',
+            poster: '/posters/digital-solutions/folding-carton/equipment-monitoring-historical.jpg',
+            src: '/videos/digital-solutions/folding-carton/equipment-monitoring-historical.mp4',
+          },
+          {
+            title: 'Downtime Analysis — Live Demo',
+            poster: '/posters/digital-solutions/folding-carton/downtime-analysis.jpg',
+            src: '/videos/digital-solutions/folding-carton/downtime-analysis.mp4',
+          },
+          {
+            title: 'ACCUCHECK — Live Demo',
+            poster: '/posters/digital-solutions/folding-carton/accucheck-demo.jpg',
+            src: '/videos/digital-solutions/folding-carton/accucheck-demo.mp4',
+          },
+          {
+            title: 'Shop Floor Overview — Live Demo',
+            poster: '/posters/digital-solutions/folding-carton/shop-floor-overview.jpg',
+            src: '/videos/digital-solutions/folding-carton/shop-floor-overview.mp4',
+          },
         ],
       },
       'labels': {
@@ -473,7 +590,17 @@ const stations = {
           'Discover how BOBST Connect transforms real-time machine data into actionable linear meter usage insights — helping converters simplify makeready, reduce downtime and optimize machine profitability.',
         liveDemo: 'Live Demo at 10am & 3pm',
         videos: [
+          {
+            title: 'BOBST LOUPE — Labels',
+            poster: '/posters/digital-solutions/labels/bobst-loupe-promo.jpg',
+            src: '/videos/digital-solutions/labels/bobst-loupe-promo.mp4',
+          },
           { title: 'BOBST Connect — Overview and Success Story', provider: 'vimeo', embedId: '949042871' },
+          {
+            title: 'ACCUCHECK — Live Demo',
+            poster: '/posters/digital-solutions/labels/accucheck-demo.jpg',
+            src: '/videos/digital-solutions/labels/accucheck-demo.mp4',
+          },
         ],
       },
     },
