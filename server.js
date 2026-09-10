@@ -28,6 +28,21 @@ const serveConfig = {
   // ever sees requests for real files or `/`, but this keeps parity with the
   // previous `serve -s dist` behavior for any other path.
   rewrites: [{ source: '**', destination: '/index.html' }],
+  headers: [
+    {
+      // Videos/images/posters/hashed JS+CSS bundles are content-addressed
+      // or effectively immutable for the life of a deploy — let the
+      // browser (and any kiosk that replays the same clips repeatedly
+      // over the course of a multi-day conference) cache them hard
+      // instead of re-fetching from the volume every time.
+      source: '**/*.@(mp4|webm|mov|jpg|jpeg|png|webp|svg)',
+      headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+    },
+    {
+      source: 'assets/**',
+      headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+    },
+  ],
 };
 
 function startWorkerServer() {
