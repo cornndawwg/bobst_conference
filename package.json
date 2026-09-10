@@ -7,11 +7,15 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "start": "node server.js",
     "screenshot": "node scripts/screenshot.mjs"
   },
   "devDependencies": {
     "playwright": "^1.62.0",
     "sharp": "^0.35.3",
     "vite": "^8.1.0"
+  },
+  "dependencies": {
+    "serve-handler": "^6.1.7"
   }
 }
