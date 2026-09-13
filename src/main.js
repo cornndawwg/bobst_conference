@@ -56,14 +56,16 @@ function getVideoPoster(video) {
 
 // ============================================================
 // Hero/detail headline markup — every big page heading (hub, station
-// home, market detail) uses the same two-weight treatment: a bold
-// "accent" clause followed by a light-weight continuation, matching the
-// home page's "Reduce Complexity, / Improve Performance" hero title.
-// The base `.hero__title`/`.detail__title` font-weight is already light
-// (300); wrapping the accent clause in <b> bumps just that part to 700.
-// Headlines authored with a comma split on it (bold clause + <br> +
-// light clause, exactly like the hub); headlines without one just get
-// their leading word bolded so every heading gets the same accent look.
+// home, market detail) always renders as exactly two lines: a bold
+// "accent" clause on line one, a light-weight continuation on line
+// two, matching the home page's "Reduce Complexity, / Improve
+// Performance" hero title. This is a hard `<br>` (not just a wrap),
+// because the red accent dash (`.hero__title::before`) is vertically
+// centered on the *whole* title block — with a forced two-line split
+// it always lands right on the boundary between the two lines, same
+// as on the home page. The base `.hero__title`/`.detail__title`
+// font-weight is already light (300); wrapping the accent clause in
+// <b> bumps just that part to 700.
 // ============================================================
 function renderHeroHeadline(text) {
   const commaIndex = text.indexOf(',');
@@ -72,11 +74,13 @@ function renderHeroHeadline(text) {
     const rest = text.slice(commaIndex + 1).trim();
     return `<b>${bold}</b><br>${rest}`;
   }
+  // No comma: bold just the leading word as the accent clause, force
+  // everything else onto a second line.
   const spaceIndex = text.indexOf(' ');
   if (spaceIndex === -1) return `<b>${text}</b>`;
   const firstWord = text.slice(0, spaceIndex);
   const rest = text.slice(spaceIndex + 1);
-  return `<b>${firstWord}</b> ${rest}`;
+  return `<b>${firstWord}</b><br>${rest}`;
 }
 
 // ============================================================

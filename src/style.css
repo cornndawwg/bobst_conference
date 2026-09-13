@@ -596,6 +596,7 @@ button {
 }
 
 .detail__title {
+  position: relative;
   font-size: clamp(2rem, 4vw, 3.25rem);
   font-weight: 300;
   letter-spacing: -0.02em;
@@ -607,6 +608,21 @@ button {
 
 .detail__title b {
   font-weight: 700;
+}
+
+/* Same red accent dash as the home/station hero titles, vertically
+   centered on the two-line title block. */
+.detail__title::before {
+  content: '';
+  display: block;
+  position: absolute;
+  background: var(--accent);
+  width: 15px;
+  height: 9px;
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  animation: heroRect 1s ease 0s 1 normal forwards;
 }
 
 .detail__live-demo {
