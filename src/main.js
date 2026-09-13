@@ -74,13 +74,14 @@ function renderHeroHeadline(text) {
     const rest = text.slice(commaIndex + 1).trim();
     return `<b>${bold}</b><br>${rest}`;
   }
-  // No comma: bold just the leading word as the accent clause, force
-  // everything else onto a second line.
-  const spaceIndex = text.indexOf(' ');
-  if (spaceIndex === -1) return `<b>${text}</b>`;
-  const firstWord = text.slice(0, spaceIndex);
-  const rest = text.slice(spaceIndex + 1);
-  return `<b>${firstWord}</b><br>${rest}`;
+  // No comma: bold the leading two words as the accent clause (matching
+  // the weight of "Reduce Complexity,"), force the remainder onto a
+  // second line.
+  const words = text.split(' ');
+  if (words.length <= 2) return `<b>${text}</b>`;
+  const bold = words.slice(0, 2).join(' ');
+  const rest = words.slice(2).join(' ');
+  return `<b>${bold}</b><br>${rest}`;
 }
 
 // ============================================================
