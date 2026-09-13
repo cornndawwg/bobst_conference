@@ -55,6 +55,31 @@ function getVideoPoster(video) {
 }
 
 // ============================================================
+// Hero/detail headline markup — every big page heading (hub, station
+// home, market detail) uses the same two-weight treatment: a bold
+// "accent" clause followed by a light-weight continuation, matching the
+// home page's "Reduce Complexity, / Improve Performance" hero title.
+// The base `.hero__title`/`.detail__title` font-weight is already light
+// (300); wrapping the accent clause in <b> bumps just that part to 700.
+// Headlines authored with a comma split on it (bold clause + <br> +
+// light clause, exactly like the hub); headlines without one just get
+// their leading word bolded so every heading gets the same accent look.
+// ============================================================
+function renderHeroHeadline(text) {
+  const commaIndex = text.indexOf(',');
+  if (commaIndex !== -1) {
+    const bold = text.slice(0, commaIndex + 1);
+    const rest = text.slice(commaIndex + 1).trim();
+    return `<b>${bold}</b><br>${rest}`;
+  }
+  const spaceIndex = text.indexOf(' ');
+  if (spaceIndex === -1) return `<b>${text}</b>`;
+  const firstWord = text.slice(0, spaceIndex);
+  const rest = text.slice(spaceIndex + 1);
+  return `<b>${firstWord}</b> ${rest}`;
+}
+
+// ============================================================
 // Station + Market Content
 // ============================================================
 // NOTE on videos: `src`/`poster` currently point at local dev copies under
@@ -722,10 +747,7 @@ function renderHub() {
         <section class="hero" id="hero-section">
           <div class="hero__content">
             <div class="hero__eyebrow">BOBST Packaging Solutions</div>
-            <h1 class="hero__title">
-              <b>Reduce Complexity,</b><br>
-              Improve Performance
-            </h1>
+            <h1 class="hero__title">${renderHeroHeadline('Reduce Complexity, Improve Performance')}</h1>
             <p class="hero__subtitle">
               Choose a station below to explore BOBST solutions across Flexible Packaging, Folding Carton and Labels.
             </p>
@@ -766,7 +788,7 @@ function renderStationHome(stationSlug) {
         <section class="hero" id="hero-section">
           <div class="hero__content">
             <div class="hero__eyebrow">${station.category}</div>
-            <h1 class="hero__title"><b>${station.headline}</b></h1>
+            <h1 class="hero__title">${renderHeroHeadline(station.headline)}</h1>
             <p class="hero__subtitle">${station.intro}</p>
           </div>
         </section>
@@ -866,7 +888,7 @@ function renderMarketDetail(stationSlug, marketSlug) {
         <div class="detail__hero detail__hero--minimal">
           <div class="detail__hero-content">
             <div class="detail__category">${station.category} — ${MARKET_TITLES[marketSlug] || marketSlug}</div>
-            <h1 class="detail__title"><b>${market.headline}</b></h1>
+            <h1 class="detail__title">${renderHeroHeadline(market.headline)}</h1>
             <p class="detail__intro">${market.body}</p>
             ${market.liveDemo ? `<div class="detail__live-demo">${icons.clock}<span>${market.liveDemo}</span></div>` : ''}
             ${renderVideoCarousel(market.videos)}
