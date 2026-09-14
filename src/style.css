@@ -602,7 +602,10 @@ button {
   letter-spacing: -0.02em;
   line-height: 1.15;
   margin-bottom: var(--space-3);
-  max-width: 700px;
+  /* No max-width (matches .hero__title) — a narrower cap here made
+     longer light-weight second lines (e.g. "Label Operation Moving
+     Forward") wrap onto a 3rd line, which throws off the accent dash
+     that's centered on the whole (intended-to-be-two-line) block. */
   color: var(--bobst-black);
 }
 
