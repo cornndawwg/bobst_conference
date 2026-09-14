@@ -1,9 +1,9 @@
 import { chromium } from 'playwright';
 
 const routes = [
-  '#/s/productivity-solutions/flexible-packaging',
-  '#/s/productivity-solutions/folding-carton',
-  '#/s/productivity-solutions/labels',
+  '#/s/lifecycle-performance-services/flexible-packaging',
+  '#/s/lifecycle-performance-services/folding-carton',
+  '#/s/lifecycle-performance-services/labels',
   '#/s/quality-color-consistency/flexible-packaging',
   '#/s/sustainability-innovation/flexible-packaging',
   '#/s/sustainability-innovation/labels',

@@ -16,7 +16,7 @@ const sizes = [
 
 const routes = [
   { path: '/', name: 'hub' },
-  { path: '/#/s/productivity-solutions', name: 'station-productivity' },
+  { path: '/#/s/lifecycle-performance-services', name: 'station-lifecycle' },
   { path: '/#/s/digital-solutions', name: 'station-digital' },
 ];
 

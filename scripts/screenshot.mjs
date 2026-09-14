@@ -9,10 +9,10 @@ const BASE_URL = `http://localhost:${PORT}`;
 
 const routes = [
   { path: '/', name: 'hub' },
-  { path: '/#/s/productivity-solutions', name: 'productivity-solutions-home' },
-  { path: '/#/s/productivity-solutions/flexible-packaging', name: 'productivity-flexible-packaging' },
-  { path: '/#/s/productivity-solutions/folding-carton', name: 'productivity-folding-carton' },
-  { path: '/#/s/productivity-solutions/labels', name: 'productivity-labels' },
+  { path: '/#/s/lifecycle-performance-services', name: 'lifecycle-performance-services-home' },
+  { path: '/#/s/lifecycle-performance-services/flexible-packaging', name: 'lifecycle-flexible-packaging' },
+  { path: '/#/s/lifecycle-performance-services/folding-carton', name: 'lifecycle-folding-carton' },
+  { path: '/#/s/lifecycle-performance-services/labels', name: 'lifecycle-labels' },
   { path: '/#/s/quality-color-consistency', name: 'quality-home' },
   { path: '/#/s/quality-color-consistency/labels', name: 'quality-labels' },
   { path: '/#/s/sustainability-innovation', name: 'sustainability-home' },

@@ -93,7 +93,6 @@ function renderHeroHeadline(text) {
 // object storage, etc.) once the real videos are uploaded — posters are
 // small enough to ship in the repo as-is.
 const stationOrder = [
-  'productivity-solutions',
   'quality-color-consistency',
   'sustainability-innovation',
   'lifecycle-performance-services',
@@ -101,127 +100,6 @@ const stationOrder = [
 ];
 
 const stations = {
-  'productivity-solutions': {
-    category: 'Productivity Solutions',
-    headline: 'Reduce Complexity, Improve Performance',
-    intro:
-      'Explore BOBST solutions that simplify workflows, automate critical processes and help converters produce more efficiently across Flexible Packaging, Folding Carton and Labels.',
-    markets: {
-      'flexible-packaging': {
-        blurb:
-          'Reduce setup time and operator dependency through automated press processes, faster changeovers and more repeatable production.',
-        headline: 'Simplify Flexible Packaging Production',
-        body:
-          'Automated solutions such as smartGPS and connected end-to-end workflows help reduce setup time, operator dependency and process variation while improving overall press performance. BOBST smartGPS delivers up to a 30% productivity increase without changing production speed.',
-        videos: [
-          {
-            title: 'BOBST smartGPS — Graphic Positioning System for CI Flexo',
-            poster: '/posters/productivity-solutions/flexible-packaging/smartgps-ci-flexo-press.jpg',
-            src: '/videos/productivity-solutions/flexible-packaging/smartgps-ci-flexo-press.mp4',
-          },
-        ],
-        slides: [
-          {
-            title: 'smartGPS — SAMM 3.0 Mounting Unit',
-            image: '/images/productivity-solutions/flexible-packaging/smartgps-samm-unit.jpg',
-          },
-          {
-            title: 'smartGPS Live on the Show Floor',
-            image: '/images/productivity-solutions/flexible-packaging/smartgps-live-demo-floor.jpg',
-          },
-        ],
-      },
-      'folding-carton': {
-        blurb:
-          'Improve makeready and production performance through standardized tooling, integrated workflows and certified processes.',
-        headline: 'Improve Folding Carton Productivity',
-        body:
-          'Standardized tooling, connected production processes and workforce training help converters reduce makeready time, improve repeatability and maintain performance across every job. High Performance Tooling and TooLink together can reduce set-up time and increase output by up to 30%.',
-        videos: [
-          {
-            title: 'Zumbiel and BOBST',
-            provider: 'vimeo',
-            embedId: '1093624953',
-            embedHash: '5f4c0ef396',
-            poster: 'https://i.vimeocdn.com/video/2027022860-409eb7beeef9265e367f548f842755fa3e2ca4e4ac9c0960b2b3b327374fc57e-d_1280x720?region=us',
-          },
-          {
-            title: 'Tooling, TooLink and CITO — Proof Points',
-            poster: '/posters/productivity-solutions/folding-carton/tooling-toolink-cito-proof-points.jpg',
-            src: '/videos/productivity-solutions/folding-carton/tooling-toolink-cito-proof-points.mp4',
-          },
-        ],
-        slides: [
-          {
-            title: 'High Performance Tooling — Precision Detail',
-            image: '/images/productivity-solutions/folding-carton/tooling-close-up.jpg',
-          },
-          {
-            title: 'Loading a High Performance Die Plate',
-            image: '/images/productivity-solutions/folding-carton/tooling-plate-loading.jpg',
-          },
-        ],
-      },
-      'labels': {
-        blurb:
-          'Combine printing and converting operations with intelligent automation to manage shorter runs, increasing SKU complexity and faster turnaround requirements.',
-        headline: 'Increase Label Production Agility',
-        body:
-          'BOBST solutions integrate printing, embellishment and converting to simplify production, reduce manual steps and support faster, more efficient job changeovers.',
-        videos: [
-          {
-            title: 'MASTER M6 oneECG — BOBST Connect Live Demo',
-            poster: '/posters/productivity-solutions/labels/master-m6.jpg',
-            src: '/videos/productivity-solutions/labels/master-m6-oneecg-connect-live-demo.mp4',
-          },
-          {
-            title: 'Brook + Whittle: Automation in Action',
-            poster: '/posters/productivity-solutions/labels/brook-whittle.jpg',
-            src: '/videos/productivity-solutions/labels/brook-whittle-full.mp4',
-          },
-          {
-            title: 'Die Plate Change',
-            poster: '/posters/productivity-solutions/labels/die-plate-change.jpg',
-            src: '/videos/productivity-solutions/labels/die-plate-change.mp4',
-          },
-          {
-            title: 'How Label Specialties Elevates Production with the MASTER M5',
-            provider: 'youtube',
-            embedId: 'p-n1VRqWWn8',
-          },
-          {
-            title: 'MASTER M6 — Exceptionally Productive',
-            poster: '/posters/productivity-solutions/labels/master-m6-vision-pillars.jpg',
-            src: '/videos/productivity-solutions/labels/master-m6-vision-pillars.mp4',
-          },
-          {
-            title: 'DIGIFLEXO in Action — Automated Register & Pressure Control',
-            poster: '/posters/productivity-solutions/labels/digiflexo-automation-demo.jpg',
-            src: '/videos/productivity-solutions/labels/digiflexo-automation-demo.mp4',
-          },
-          {
-            title: 'All-in-One Modular Press — Build Your Line',
-            poster: '/posters/productivity-solutions/labels/all-in-one-modular-press.jpg',
-            src: '/videos/productivity-solutions/labels/all-in-one-modular-press.mp4',
-          },
-        ],
-        slides: [
-          {
-            title: 'BOBST DIGITAL MASTER 340 — 2026 EDP Award Winner',
-            image: '/images/productivity-solutions/labels/digital-master-340-edp-award.jpg',
-          },
-          {
-            title: 'DIGITAL MASTER 510 — Ultimate All-in-One with FLEXJET',
-            image: '/images/productivity-solutions/labels/digital-master-510-infographic.jpg',
-          },
-          {
-            title: 'Mouvent — High-Speed Rewinder in Action',
-            image: '/images/productivity-solutions/labels/mouvent-rewinder.jpg',
-          },
-        ],
-      },
-    },
-  },
   'quality-color-consistency': {
     category: 'Quality & Color Consistency',
     headline: 'Deliver Color Consistency',
@@ -431,7 +309,7 @@ const stations = {
   },
   'lifecycle-performance-services': {
     category: 'Lifecycle Performance & Services',
-    headline: 'Power Continous Performance Improvement',
+    headline: 'Power Continuous Performance Improvement',
     intro:
       'Maximize the long-term value of your equipment through expert service, maintenance, upgrades, tooling support and solutions tailored to evolving production needs.',
     markets: {
@@ -447,6 +325,11 @@ const stations = {
             poster: '/posters/lifecycle-performance-services/flexible-packaging/bobst-services-overview.jpg',
             src: '/videos/lifecycle-performance-services/flexible-packaging/bobst-services-overview.mp4',
           },
+          {
+            title: 'BOBST smartGPS — Graphic Positioning System for CI Flexo',
+            poster: '/posters/productivity-solutions/flexible-packaging/smartgps-ci-flexo-press.jpg',
+            src: '/videos/productivity-solutions/flexible-packaging/smartgps-ci-flexo-press.mp4',
+          },
         ],
         slides: [
           {
@@ -460,6 +343,14 @@ const stations = {
           {
             title: 'BOBST Connect — Anywhere, Anytime',
             image: '/images/lifecycle-performance-services/flexible-packaging/bobst-connect-laptop.jpg',
+          },
+          {
+            title: 'smartGPS — SAMM 3.0 Mounting Unit',
+            image: '/images/productivity-solutions/flexible-packaging/smartgps-samm-unit.jpg',
+          },
+          {
+            title: 'smartGPS Live on the Show Floor',
+            image: '/images/productivity-solutions/flexible-packaging/smartgps-live-demo-floor.jpg',
           },
         ],
       },
@@ -477,6 +368,18 @@ const stations = {
             embedHash: '622dc8d7c6',
             poster: 'https://i.vimeocdn.com/video/2022505467-284fd9cab0c714e0e7a2f2c44ede12504a85e513fee7a094b46bfabc8020b0ce-d_1280x720?region=us',
           },
+          {
+            title: 'Zumbiel and BOBST',
+            provider: 'vimeo',
+            embedId: '1093624953',
+            embedHash: '5f4c0ef396',
+            poster: 'https://i.vimeocdn.com/video/2027022860-409eb7beeef9265e367f548f842755fa3e2ca4e4ac9c0960b2b3b327374fc57e-d_1280x720?region=us',
+          },
+          {
+            title: 'Tooling, TooLink and CITO — Proof Points',
+            poster: '/posters/productivity-solutions/folding-carton/tooling-toolink-cito-proof-points.jpg',
+            src: '/videos/productivity-solutions/folding-carton/tooling-toolink-cito-proof-points.mp4',
+          },
         ],
         slides: [
           {
@@ -486,6 +389,14 @@ const stations = {
           {
             title: 'A Long-Term View of Your Production Floor',
             image: '/images/lifecycle-performance-services/folding-carton/plant-overview.jpg',
+          },
+          {
+            title: 'High Performance Tooling — Precision Detail',
+            image: '/images/productivity-solutions/folding-carton/tooling-close-up.jpg',
+          },
+          {
+            title: 'Loading a High Performance Die Plate',
+            image: '/images/productivity-solutions/folding-carton/tooling-plate-loading.jpg',
           },
         ],
       },
@@ -501,6 +412,41 @@ const stations = {
             poster: '/posters/lifecycle-performance-services/labels/service-performance-overview.jpg',
             src: '/videos/lifecycle-performance-services/labels/service-performance-overview.mp4',
           },
+          {
+            title: 'MASTER M6 oneECG — BOBST Connect Live Demo',
+            poster: '/posters/productivity-solutions/labels/master-m6.jpg',
+            src: '/videos/productivity-solutions/labels/master-m6-oneecg-connect-live-demo.mp4',
+          },
+          {
+            title: 'Brook + Whittle: Automation in Action',
+            poster: '/posters/productivity-solutions/labels/brook-whittle.jpg',
+            src: '/videos/productivity-solutions/labels/brook-whittle-full.mp4',
+          },
+          {
+            title: 'Die Plate Change',
+            poster: '/posters/productivity-solutions/labels/die-plate-change.jpg',
+            src: '/videos/productivity-solutions/labels/die-plate-change.mp4',
+          },
+          {
+            title: 'How Label Specialties Elevates Production with the MASTER M5',
+            provider: 'youtube',
+            embedId: 'p-n1VRqWWn8',
+          },
+          {
+            title: 'MASTER M6 — Exceptionally Productive',
+            poster: '/posters/productivity-solutions/labels/master-m6-vision-pillars.jpg',
+            src: '/videos/productivity-solutions/labels/master-m6-vision-pillars.mp4',
+          },
+          {
+            title: 'DIGIFLEXO in Action — Automated Register & Pressure Control',
+            poster: '/posters/productivity-solutions/labels/digiflexo-automation-demo.jpg',
+            src: '/videos/productivity-solutions/labels/digiflexo-automation-demo.mp4',
+          },
+          {
+            title: 'All-in-One Modular Press — Build Your Line',
+            poster: '/posters/productivity-solutions/labels/all-in-one-modular-press.jpg',
+            src: '/videos/productivity-solutions/labels/all-in-one-modular-press.mp4',
+          },
         ],
         slides: [
           {
@@ -514,6 +460,18 @@ const stations = {
           {
             title: 'From Beverage to Personal Care — Every Label Application',
             image: '/images/lifecycle-performance-services/labels/label-application-range.jpg',
+          },
+          {
+            title: 'BOBST DIGITAL MASTER 340 — 2026 EDP Award Winner',
+            image: '/images/productivity-solutions/labels/digital-master-340-edp-award.jpg',
+          },
+          {
+            title: 'DIGITAL MASTER 510 — Ultimate All-in-One with FLEXJET',
+            image: '/images/productivity-solutions/labels/digital-master-510-infographic.jpg',
+          },
+          {
+            title: 'Mouvent — High-Speed Rewinder in Action',
+            image: '/images/productivity-solutions/labels/mouvent-rewinder.jpg',
           },
         ],
       },
