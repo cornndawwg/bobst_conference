@@ -271,6 +271,13 @@ const stations = {
             src: '/videos/quality-color-consistency/folding-carton/tooling-patrick-brian.mp4',
           },
           { title: 'How TAVO Packaging Is Delivering More with BOBST', provider: 'youtube', embedId: '-pvVuTX9S8A' },
+          {
+            title: 'See How Midlands Packaging Is Advancing Quality and Efficiency with BOBST',
+            provider: 'vimeo',
+            embedId: '1089981976',
+            embedHash: '622dc8d7c6',
+            poster: 'https://i.vimeocdn.com/video/2022505467-284fd9cab0c714e0e7a2f2c44ede12504a85e513fee7a094b46bfabc8020b0ce-d_1280x720?region=us',
+          },
         ],
         slides: [
           {
@@ -489,13 +496,6 @@ const stations = {
         body:
           'Modular upgrades, retrofits and lifecycle services help label converters respond to changing market requirements and introduce new capabilities without replacing their entire production platform. BOBST Services can cut downtime by up to 60% and resolve up to 80% of issues remotely through Helpline and BOBST Connect.',
         videos: [
-          {
-            title: 'See How Midlands Packaging Is Advancing Quality and Efficiency with BOBST',
-            provider: 'vimeo',
-            embedId: '1089981976',
-            embedHash: '622dc8d7c6',
-            poster: 'https://i.vimeocdn.com/video/2022505467-284fd9cab0c714e0e7a2f2c44ede12504a85e513fee7a094b46bfabc8020b0ce-d_1280x720?region=us',
-          },
           {
             title: 'BOBST Services — Connected to Power Your Performance',
             poster: '/posters/lifecycle-performance-services/labels/service-performance-overview.jpg',
