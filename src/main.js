@@ -424,7 +424,7 @@ const stations = {
   },
   'lifecycle-performance-services': {
     category: 'Lifecycle Performance & Services',
-    headline: 'Power Continuous Performance Improvement',
+    headline: 'Power Continous Performance Improvement',
     intro:
       'Maximize the long-term value of your equipment through expert service, maintenance, upgrades, tooling support and solutions tailored to evolving production needs.',
     markets: {
