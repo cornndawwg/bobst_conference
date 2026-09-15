@@ -68,6 +68,12 @@ function getVideoPoster(video) {
 // <b> bumps just that part to 700.
 // ============================================================
 function renderHeroHeadline(text) {
+  // Manual override: pass [boldFirstLine, plainSecondLine] when the
+  // auto comma/word-count split doesn't land where the copy needs it.
+  if (Array.isArray(text)) {
+    const [bold, rest] = text;
+    return `<b>${bold}</b><br>${rest}`;
+  }
   const commaIndex = text.indexOf(',');
   if (commaIndex !== -1) {
     const bold = text.slice(0, commaIndex + 1);
@@ -595,7 +601,7 @@ const stations = {
       'labels': {
         blurb:
           'Connect digital, flexo and All-in-One production to improve job management, process visibility and operational responsiveness.',
-        headline: 'Create a More Connected Label Workflow',
+        headline: ['Create a More', 'Connected Label Workflow'],
         body:
           'Discover how BOBST Connect transforms real-time machine data into actionable linear meter usage insights — helping converters simplify makeready, reduce downtime and optimize machine profitability.',
         liveDemo: 'Live Demo at 10am & 3pm',
