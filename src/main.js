@@ -380,6 +380,16 @@ const stations = {
             poster: '/posters/productivity-solutions/folding-carton/tooling-toolink-cito-proof-points.jpg',
             src: '/videos/productivity-solutions/folding-carton/tooling-toolink-cito-proof-points.mp4',
           },
+          {
+            title: 'EXPERTCUT 106 PER — Game-Changing Efficiency and Productivity',
+            provider: 'youtube',
+            embedId: '0XbSEUsLpfQ',
+          },
+          {
+            title: 'EXPERTFOLD 110 — Boosting Connectivity and Automation',
+            provider: 'youtube',
+            embedId: 'L1TPpyqQk-Q',
+          },
         ],
         slides: [
           {
@@ -397,6 +407,18 @@ const stations = {
           {
             title: 'Loading a High Performance Die Plate',
             image: '/images/productivity-solutions/folding-carton/tooling-plate-loading.jpg',
+          },
+          {
+            title: 'B-210.002 Pack Energy Efficiency',
+            image: '/images/lifecycle-performance-services/folding-carton/pack-energy-efficiency.jpg',
+          },
+          {
+            title: 'B-210.013 Energy Monitoring',
+            image: '/images/lifecycle-performance-services/folding-carton/energy-monitoring.jpg',
+          },
+          {
+            title: 'E-900.001 | 900.010 ZERO PATCHING Plate',
+            image: '/images/lifecycle-performance-services/folding-carton/zero-patching-plate.jpg',
           },
         ],
       },
