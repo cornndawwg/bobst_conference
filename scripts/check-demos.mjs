@@ -1,9 +1,13 @@
 import { chromium } from 'playwright';
-import { mkdirSync } from 'fs';
+import { mkdirSync, readdirSync } from 'fs';
 
 const BASE = 'http://localhost:5173';
 const OUT = 'screenshots/demos';
 mkdirSync(OUT, { recursive: true });
+
+// Derived from the slide art on disk so this keeps covering every demo
+// as more are added, rather than a hard-coded count drifting out of date.
+const DEMO_COUNT = readdirSync('public/images/demos').filter((f) => f.endsWith('.jpg')).length;
 
 // Kiosk target plus a couple of common panel sizes.
 const viewports = [
@@ -38,7 +42,7 @@ for (const vp of viewports) {
   }
 
   // Each demo slide, full-bleed.
-  for (let n = 1; n <= 5; n++) {
+  for (let n = 1; n <= DEMO_COUNT; n++) {
     await page.goto(`${BASE}/#/demos/${n}`, { waitUntil: 'load' });
     await page.waitForTimeout(500);
     const info = await page.evaluate(() => {
