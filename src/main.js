@@ -33,14 +33,34 @@ const MARKET_IMAGES = {
 // ============================================================
 // Demo Signage — each entry is a 1920x1080 "Next Demo" slide shown
 // full-bleed on the kiosk so staff can put the upcoming demo on screen.
+//
+// Array position is the slide's permanent id: entry N is /demos/N and
+// maps to demo-N.jpg, so new demos are appended rather than inserted.
+// The index page sorts a copy of this list into schedule order for
+// display (see scheduleMinutes / renderDemosHome).
 // ============================================================
 const demos = [
-  { title: 'Demo 1', subject: 'Pressure Sensitive Labels', time: '10:00', image: '/images/demos/demo-1.jpg' },
-  { title: 'Demo 2', subject: 'Multilayer Labels', time: '3:00', image: '/images/demos/demo-2.jpg' },
-  { title: 'Demo 3', subject: 'Multilayer Labels', time: '10:30', image: '/images/demos/demo-3.jpg' },
-  { title: 'Demo 4', subject: 'Pressure Sensitive Labels', time: '3:00', image: '/images/demos/demo-4.jpg' },
-  { title: 'Demo 5', subject: 'Pressure Sensitive Labels', time: '10:30', image: '/images/demos/demo-5.jpg' },
+  { subject: 'Pressure Sensitive Labels', time: '10:00', image: '/images/demos/demo-1.jpg' },
+  { subject: 'Multilayer Labels', time: '3:00', image: '/images/demos/demo-2.jpg' },
+  { subject: 'Multilayer Labels', time: '10:30', image: '/images/demos/demo-3.jpg' },
+  { subject: 'Pressure Sensitive Labels', time: '3:00', image: '/images/demos/demo-4.jpg' },
+  { subject: 'Pressure Sensitive Labels', time: '10:30', image: '/images/demos/demo-5.jpg' },
+  { subject: 'Multilayer Labels', time: '10:00', image: '/images/demos/demo-6.jpg' },
+  { subject: 'Multilayer Labels', time: '11:00', image: '/images/demos/demo-7.jpg' },
+  { subject: 'Multilayer Labels', time: '12:30', image: '/images/demos/demo-8.jpg' },
+  { subject: 'Pressure Sensitive Labels', time: '11:00', image: '/images/demos/demo-9.jpg' },
+  { subject: 'Pressure Sensitive Labels', time: '2:30', image: '/images/demos/demo-10.jpg' },
+  { subject: 'Pressure Sensitive Labels', time: '4:00', image: '/images/demos/demo-11.jpg' },
 ];
+
+// The slides print a bare clock time with no AM/PM, so resolve it against
+// a show day that runs morning to late afternoon: 8–11 is AM, 12 and
+// 1–7 are PM. Returns minutes past midnight for sorting.
+function scheduleMinutes(time) {
+  const [hour, minute] = time.split(':').map(Number);
+  const hour24 = hour === 12 ? 12 : hour < 8 ? hour + 12 : hour;
+  return hour24 * 60 + minute;
+}
 
 // ============================================================
 // Video helpers — a video entry is either a locally-hosted file
@@ -676,8 +696,18 @@ function renderNav(backHref, backLabel) {
 // ============================================================
 // Shared: Card grid section (used by hub + station home)
 // ============================================================
-function renderCardsSection({ label, title, cards }) {
-  const gridModifier = cards.length === 5 ? ' sections__grid--5' : cards.length === 4 ? ' sections__grid--4' : '';
+// `columns` is an explicit override for grids that shouldn't be sized by
+// their card count — the demos index packs 11 cards into 6 columns. Without
+// it the count-based defaults below apply, unchanged.
+function renderCardsSection({ label, title, cards, columns }) {
+  const gridModifier =
+    columns === 6
+      ? ' sections__grid--6'
+      : cards.length === 5
+        ? ' sections__grid--5'
+        : cards.length === 4
+          ? ' sections__grid--4'
+          : '';
 
   const cardsHtml = cards
     .map(
@@ -747,7 +777,7 @@ function renderHub() {
   cards.push({
     href: '#/demos',
     title: 'Demos',
-    description: 'Full-screen announcements for the five scheduled floor demos.',
+    description: `Full-screen announcements for all ${demos.length} scheduled floor demos.`,
     cta: 'View',
   });
 
@@ -814,16 +844,25 @@ function renderStationHome(stationSlug) {
 }
 
 // ============================================================
-// Demos Home — the 5 demo signage slides, one link each
+// Demos Home — every demo signage slide, one link each, grouped by
+// subject and then run in schedule order so the page reads the way
+// the floor schedule does.
 // ============================================================
 function renderDemosHome() {
-  const cards = demos.map((demo, i) => ({
-    href: `#/demos/${i + 1}`,
-    title: demo.title,
-    description: `${demo.subject} — ${demo.time}`,
-    image: demo.image,
-    cta: 'Display',
-  }));
+  const cards = demos
+    .map((demo, i) => ({ demo, id: i + 1 }))
+    .sort(
+      (a, b) =>
+        a.demo.subject.localeCompare(b.demo.subject) ||
+        scheduleMinutes(a.demo.time) - scheduleMinutes(b.demo.time)
+    )
+    .map(({ demo, id }) => ({
+      href: `#/demos/${id}`,
+      title: demo.time,
+      description: demo.subject,
+      image: demo.image,
+      cta: 'Display',
+    }));
 
   return `
     ${renderNav('#/', 'Back to Overview')}
@@ -840,7 +879,7 @@ function renderDemosHome() {
           </div>
         </section>
 
-        ${renderCardsSection({ label: 'Demos', title: 'Choose a Demo', cards })}
+        ${renderCardsSection({ label: 'Demos', title: 'Choose a Demo', cards, columns: 6 })}
 
         ${renderFooter()}
       </div>
@@ -863,7 +902,7 @@ function renderDemoSlide(demoNumber) {
         <img
           class="demo-slide__image"
           src="${demo.image}"
-          alt="${demo.title} — ${demo.subject} at ${demo.time}"
+          alt="Next demo — ${demo.subject} at ${demo.time}"
         />
         <a href="#/demos" class="demo-slide__back">
           <span class="demo-slide__back-arrow">${icons.arrowLeft}</span>

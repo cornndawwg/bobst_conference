@@ -386,6 +386,23 @@ button {
   gap: var(--space-4);
 }
 
+.sections__grid--6 {
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-3);
+}
+
+/* The demos index is the one card grid that runs to two rows. Shorter
+   thumbnails and tighter page padding keep all 11 cards plus the footer
+   on a single 1080p kiosk screen, with no scrolling. */
+.sections__grid--6 .card__image-wrapper {
+  height: 64px;
+}
+
+#demos-page .hero,
+#demos-page .sections {
+  padding-bottom: var(--space-4);
+}
+
 /* ---- CARD ---- */
 .card {
   position: relative;
