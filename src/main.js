@@ -31,6 +31,18 @@ const MARKET_IMAGES = {
 };
 
 // ============================================================
+// Demo Signage — each entry is a 1920x1080 "Next Demo" slide shown
+// full-bleed on the kiosk so staff can put the upcoming demo on screen.
+// ============================================================
+const demos = [
+  { title: 'Demo 1', subject: 'Pressure Sensitive Labels', time: '10:00', image: '/images/demos/demo-1.jpg' },
+  { title: 'Demo 2', subject: 'Multilayer Labels', time: '3:00', image: '/images/demos/demo-2.jpg' },
+  { title: 'Demo 3', subject: 'Multilayer Labels', time: '10:30', image: '/images/demos/demo-3.jpg' },
+  { title: 'Demo 4', subject: 'Pressure Sensitive Labels', time: '3:00', image: '/images/demos/demo-4.jpg' },
+  { title: 'Demo 5', subject: 'Pressure Sensitive Labels', time: '10:30', image: '/images/demos/demo-5.jpg' },
+];
+
+// ============================================================
 // Video helpers — a video entry is either a locally-hosted file
 // ({ src, poster }) or a hosted embed ({ provider: 'vimeo'|'youtube',
 // embedId, poster? }). This lets Vimeo/YouTube links play inline in the
@@ -628,6 +640,8 @@ const stations = {
 //   #/                              -> hub (5 stations)
 //   #/s/<station>                   -> station home (its markets)
 //   #/s/<station>/<market>          -> market detail
+//   #/demos                         -> demo signage index (5 slides)
+//   #/demos/<n>                     -> one demo slide, full-bleed
 // ============================================================
 function getRouteSegments() {
   const hash = window.location.hash.slice(1);
@@ -684,7 +698,7 @@ function renderCardsSection({ label, title, cards }) {
         <h3 class="card__title">${card.title}</h3>
         <p class="card__description">${card.description}</p>
         <span class="card__cta">
-          Explore
+          ${card.cta || 'Explore'}
           <span class="card__cta-arrow">${icons.arrowRight}</span>
         </span>
       </div>
@@ -728,6 +742,13 @@ function renderHub() {
       title: s.category,
       description: s.intro,
     };
+  });
+
+  cards.push({
+    href: '#/demos',
+    title: 'Demos',
+    description: 'Full-screen announcements for the five scheduled floor demos.',
+    cta: 'View',
   });
 
   return `
@@ -787,6 +808,67 @@ function renderStationHome(stationSlug) {
         ${renderCardsSection({ label: 'Markets', title: 'Explore by Market', cards })}
 
         ${renderFooter()}
+      </div>
+    </div>
+  `;
+}
+
+// ============================================================
+// Demos Home — the 5 demo signage slides, one link each
+// ============================================================
+function renderDemosHome() {
+  const cards = demos.map((demo, i) => ({
+    href: `#/demos/${i + 1}`,
+    title: demo.title,
+    description: `${demo.subject} — ${demo.time}`,
+    image: demo.image,
+    cta: 'Display',
+  }));
+
+  return `
+    ${renderNav('#/', 'Back to Overview')}
+
+    <div class="page" id="demos-page">
+      <div class="home-viewport">
+        <section class="hero" id="hero-section">
+          <div class="hero__content">
+            <div class="hero__eyebrow">On-Floor Schedule</div>
+            <h1 class="hero__title">${renderHeroHeadline(['Next Demo', 'Signage'])}</h1>
+            <p class="hero__subtitle">
+              Select a demo below to put its full-screen announcement on the display.
+            </p>
+          </div>
+        </section>
+
+        ${renderCardsSection({ label: 'Demos', title: 'Choose a Demo', cards })}
+
+        ${renderFooter()}
+      </div>
+    </div>
+  `;
+}
+
+// ============================================================
+// Demo Slide — the announcement image full-bleed, nothing else.
+// Source art is 1920x1080, so it maps 1:1 onto a 1080p kiosk.
+// ============================================================
+function renderDemoSlide(demoNumber) {
+  const index = Number(demoNumber) - 1;
+  const demo = demos[index];
+  if (!demo) return renderDemosHome();
+
+  return `
+    <div class="page" id="demo-slide-page">
+      <div class="demo-slide">
+        <img
+          class="demo-slide__image"
+          src="${demo.image}"
+          alt="${demo.title} — ${demo.subject} at ${demo.time}"
+        />
+        <a href="#/demos" class="demo-slide__back">
+          <span class="demo-slide__back-arrow">${icons.arrowLeft}</span>
+          Back to Demos
+        </a>
       </div>
     </div>
   `;
@@ -909,6 +991,10 @@ function renderRoute() {
     html = renderStationHome(segments[1]);
   } else if (segments[0] === 's' && segments.length >= 3) {
     html = renderMarketDetail(segments[1], segments[2]);
+  } else if (segments[0] === 'demos' && segments.length === 1) {
+    html = renderDemosHome();
+  } else if (segments[0] === 'demos' && segments.length >= 2) {
+    html = renderDemoSlide(segments[1]);
   } else {
     html = renderHub();
   }
